@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Registration">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/ConfirmRegistrationButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="675dp"
+        android:text="Confirm Registration"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/FirstNameRegistration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="200dp"
+        android:hint="First Name" />
+
+    <EditText
+        android:id="@+id/LastNameRegistration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:layout_marginStart="100dp"
+        android:hint="Last Name" />
+
+    <EditText
+        android:id="@+id/EmailRegistration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="100dp"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/PasswordRegistration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="100dp"
+        android:hint="Password" />
+
+    <EditText
+        android:id="@+id/ConfirmPasswordRegistration"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="100dp"
+        android:hint="Confirm Password" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="32dp"
+        android:text="Trakker"
+        android:textColor="@color/purple_500"
+        android:textSize="34dp"
+        android:gravity="center"/>
+
+</RelativeLayout>
