@@ -6,4 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".LogIn">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logintitle"
+        android:text="Log In"
+        android:textColor="@color/black"
+        android:textSize="38dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        />
+
+    <EditText
+
+        android:id="@+id/usernamelogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logintitle"
+        android:drawablePadding="10dp"
+        android:hint="Username"
+        android:padding="25dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@color/lightgray"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+    <EditText
+
+        android:id="@+id/passwordlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernamelogin"
+        android:drawablePadding="10dp"
+        android:hint="Password"
+        android:padding="25dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@color/lightgray"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="300dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signInBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="SIGN IN"
+        android:textColorHint="@color/black"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="465dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/CreateacctBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="CREATE ACCOUNT"
+        android:textColorHint="@color/black"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="630dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/forgotpassBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="FORGOT PASSWORD"
+        android:textColorHint="@color/black"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="630dp" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
