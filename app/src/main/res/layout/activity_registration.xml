@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration">
+    tools:context=".Registration"
+    android:background="@drawable/stockpurplebkgrdphoto"
+    >
 
     <Button
         android:id="@+id/ConfirmRegistrationButton"
@@ -16,57 +18,66 @@
         android:layout_marginStart="82dp"
         android:layout_marginTop="675dp"
         android:text="Confirm Registration"
-        android:gravity="center"/>
+        android:textStyle="bold"
+        android:gravity="center"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/grey"/>
 
     <EditText
         android:id="@+id/FirstNameRegistration"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="200dp"
-        android:hint="First Name" />
+        android:hint="First Name"
+        android:textStyle="italic"
+        />
 
     <EditText
         android:id="@+id/LastNameRegistration"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
         android:layout_marginStart="100dp"
-        android:hint="Last Name" />
+        android:hint="Last Name"
+        android:textStyle="italic"/>
 
     <EditText
         android:id="@+id/EmailRegistration"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
         android:layout_marginStart="100dp"
-        android:hint="Email" />
+        android:hint="Email"
+        android:textStyle="italic"/>
 
     <EditText
         android:id="@+id/PasswordRegistration"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
         android:layout_marginStart="100dp"
-        android:hint="Password" />
+        android:hint="Password"
+        android:textStyle="italic"/>
 
     <EditText
         android:id="@+id/ConfirmPasswordRegistration"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         android:layout_marginStart="100dp"
-        android:hint="Confirm Password" />
+        android:hint="Confirm Password"
+        android:textStyle="italic"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -78,8 +89,9 @@
         android:layout_marginStart="149dp"
         android:layout_marginTop="32dp"
         android:text="Trakker"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/purple_200"
         android:textSize="34dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textStyle="italic"/>
 
 </RelativeLayout>
