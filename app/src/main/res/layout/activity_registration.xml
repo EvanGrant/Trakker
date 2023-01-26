@@ -11,7 +11,7 @@
     <Button
         android:id="@+id/ConfirmRegistrationButton"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/FirstNameRegistration"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="100dp"
@@ -38,7 +38,7 @@
     <EditText
         android:id="@+id/LastNameRegistration"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
@@ -49,7 +49,7 @@
     <EditText
         android:id="@+id/EmailRegistration"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
@@ -60,7 +60,7 @@
     <EditText
         android:id="@+id/PasswordRegistration"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
@@ -71,7 +71,7 @@
     <EditText
         android:id="@+id/ConfirmPasswordRegistration"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
