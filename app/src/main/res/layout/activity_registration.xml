@@ -18,6 +18,7 @@
         android:layout_marginStart="82dp"
         android:layout_marginTop="675dp"
         android:text="Confirm Registration"
+
         android:textStyle="bold"
         android:gravity="center"
         android:backgroundTint="@color/white"
