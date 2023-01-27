@@ -15,6 +15,8 @@ public class Registration extends AppCompatActivity {
     private EditText EditTextLastName;
     private Button RegisterButton;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,10 @@ public class Registration extends AppCompatActivity {
         EditTextPassword = findViewById(R.id.PasswordRegistration);
         EditTextConfirmPassword = findViewById(R.id.ConfirmPasswordRegistration);
         RegisterButton = findViewById(R.id.ConfirmRegistrationButton);
+
+
+
+
 
 
 

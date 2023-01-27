@@ -11,28 +11,54 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trakker"
-        tools:targetApi="31">
+        tools:targetApi="32">
         <activity
             android:name=".MainPage"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
+
         <activity
             android:name=".Registration"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Registration" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
+
         <activity
             android:name=".LogIn"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.LogIn" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
+
+
+
     </application>
 
 </manifest>
