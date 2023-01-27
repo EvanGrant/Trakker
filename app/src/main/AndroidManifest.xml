@@ -19,11 +19,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -34,11 +30,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.Registration" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
 
         </activity>
 
@@ -50,9 +42,9 @@
                 android:value="" />
 
             <intent-filter>
-                <action android:name="android.intent.action.LogIn" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
