@@ -13,27 +13,22 @@
         android:theme="@style/Theme.Trakker"
         tools:targetApi="32">
         <activity
+            android:name=".UserAccountPage"
+            android:exported="false" />
+        <activity
             android:name=".MainPage"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-
-
         </activity>
-
         <activity
             android:name=".Registration"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-
-
         </activity>
-
         <activity
             android:name=".LogIn"
             android:exported="true">
@@ -46,11 +41,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-
-
     </application>
 
 </manifest>
