@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F6F5F5"
+    android:background="@color/white"
     tools:context=".UserAccountPage">
 
     <RelativeLayout
@@ -51,26 +51,32 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="3"
                 android:orientation="horizontal"
                 android:padding="10dp">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Favorite Movies"
                         android:textSize="12sp"
                         android:textColor="#000"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,6 +86,7 @@
                         android:textStyle="bold"/>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -99,8 +106,8 @@
                         android:textSize="27dp"
                         android:textColor="#2196F3"
                         android:textStyle="bold"/>
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -120,13 +127,10 @@
                         android:textSize="27dp"
                         android:textColor="#2196F3"
                         android:textStyle="bold"/>
-
                 </LinearLayout>
-
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
     <LinearLayout
@@ -181,6 +185,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
+
             android:layout_marginLeft="25dp">
             <ImageView
                 android:layout_width="45dp"
@@ -191,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:textColor="#000"
+
                 android:textSize="18dp"
                 android:paddingLeft="15dp"
                 android:gravity="center"
@@ -203,9 +209,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margintop="100dp"
-        android:backgroundTint="@color/purple_200"
+        android:layout_margintop="150dp"
+        android:backgroundTint="@color/white"
         android:text="Sign Out"
+        android:textColor="@color/purple_200"
         android:textSize="18dp" />
 
 </LinearLayout>
