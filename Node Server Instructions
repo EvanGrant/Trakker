@@ -1,0 +1,12 @@
+step one: download node.js library from nodejs.org
+step two: download and install mysql (be sure to save password)
+step three: download from github MySQLScript.sql. On the second to last line in the file, change the password "noah2745" to your mysql password
+step four: run the mysql file on your mysql server
+step five: download and unzip the Trakker_Server.zip folder
+step six: in the file Trakker_Server\app\config\db.config.js, change the password parameter to your mysql password
+step seven: in your terminal, run the following command: 
+
+in the terminal, type the command "node", followed by the location of your trakker_server location and the server.js file
+
+(for sake of example, the directory to the trakker_server file is called "directorytoserver")
+node directortoserver\server.js
