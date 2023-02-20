@@ -209,7 +209,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margintop="150dp"
+
         android:backgroundTint="@color/white"
         android:text="Sign Out"
         android:textColor="@color/purple_200"
