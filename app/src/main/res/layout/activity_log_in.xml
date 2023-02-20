@@ -63,7 +63,8 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="117dp"
-        android:layout_marginEnd="167dp"
+        android:layout_marginEnd="143dp"
+        android:gravity="center"
         android:text="SIGN IN"
         android:textColorHint="@color/black" />
 
@@ -77,6 +78,7 @@
         android:layout_marginStart="119dp"
         android:layout_marginBottom="9dp"
         android:text="CREATE ACCOUNT"
+        android:gravity="center"
         android:textColorHint="@color/black" />
 
     <Button
@@ -84,13 +86,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="256dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="315dp"
         android:gravity="center"
         android:text="Forgot Password?"
         android:textColorHint="@color/black"

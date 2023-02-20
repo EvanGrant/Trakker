@@ -35,7 +35,7 @@ public class UserAccountPage extends AppCompatActivity {
                         return true;
 
 
-                    case R.id.Dashboard:
+                    case R.id.UserAccount:
                         return true;
 
                 }
