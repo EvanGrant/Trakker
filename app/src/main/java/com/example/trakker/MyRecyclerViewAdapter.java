@@ -13,6 +13,8 @@ import java.util.List;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
+
+
     private List<Integer> mViewColors;
     private List<String> mAnimals;
     private LayoutInflater mInflater;

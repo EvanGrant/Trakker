@@ -29,6 +29,8 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
 
     private MyRecyclerViewAdapter adapter;
 
+    private MyRecyclerViewAdapter adapter2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +60,22 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        // Initialize and assign variable
+        // set up the RecyclerView
+        RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
+        LinearLayoutManager horizontalLayoutManager2
+                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView2.setLayoutManager(horizontalLayoutManager2);
+        adapter2 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter2.setClickListener(this);
+        recyclerView2.setAdapter(adapter2);
+
+        // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
         // Set Home selected
         bottomNavigationView.setSelectedItemId(R.id.MainPage);
 
-        // Perform item selected listener
+        // Perform item selected listener for bottom navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
