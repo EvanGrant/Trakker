@@ -31,6 +31,9 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
 
     private MyRecyclerViewAdapter adapter2;
 
+
+    private MyRecyclerViewAdapter adapter3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,15 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         adapter2 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
         adapter2.setClickListener(this);
         recyclerView2.setAdapter(adapter2);
+
+        // set up the RecyclerView
+        RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
+        LinearLayoutManager horizontalLayoutManager3
+                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView3.setLayoutManager(horizontalLayoutManager3);
+        adapter3 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter3.setClickListener(this);
+        recyclerView3.setAdapter(adapter3);
 
         // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);

@@ -15,25 +15,7 @@
         android:layout_marginEnd="1dp"
         android:background="@color/black" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@color/darkgrey" />
 
-    <Button
-        android:id="@+id/myListsButton"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="48dp"
-        android:text="My Lists"
-        android:textSize="10dp"/>
 
 
 
@@ -43,7 +25,7 @@
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-1dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="90dp" />
 
 
@@ -55,10 +37,32 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="293dp" />
 
+    <TextView
+        android:id="@+id/textViewTopRatedShows"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="485dp"
+        android:background="@color/darkgrey"
+        android:text="Top Rated Movies"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAnimals3"
+        android:layout_width="325dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="513dp" />
 
     <TextView
         android:id="@+id/textViewRecentSearch"
@@ -111,6 +115,26 @@
         android:textColor="@color/white"
         android:textSize="38dp"
         android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/darkgrey" />
+
+    <Button
+        android:id="@+id/myListsButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="48dp"
+        android:text="My Lists"
+        android:textSize="10dp"/>
 
 
 </RelativeLayout>
