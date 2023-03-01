@@ -30,7 +30,7 @@ public class LogIn extends AppCompatActivity {
     //test image retrieval with volley and api
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "https://image.tmdb.org/t/p/w500//hZkgoQYus5vegHoetLkCJzb17zJ.jpg";
+    private String url = "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg";
 
 
     @Override
