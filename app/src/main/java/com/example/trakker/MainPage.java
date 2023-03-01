@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import android.content.Context;
@@ -23,21 +24,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     private MyRecyclerViewAdapter adapter;
-
     private MyRecyclerViewAdapter adapter2;
-
-
     private MyRecyclerViewAdapter adapter3;
+
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
+    private String url = "https://api.themoviedb.org/3/movie/550?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        getData();
 
         // data to populate the RecyclerView with
         ArrayList<Integer> viewColors = new ArrayList<>();
@@ -54,6 +64,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         animalNames.add("Sheep");
         animalNames.add("Goat");
 
+
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvAnimals);
         LinearLayoutManager horizontalLayoutManager
@@ -62,6 +73,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         adapter = new MyRecyclerViewAdapter(this, viewColors, animalNames);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
 
         // set up the RecyclerView
         RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
@@ -115,6 +127,27 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getData() {
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
     }
 
 }
