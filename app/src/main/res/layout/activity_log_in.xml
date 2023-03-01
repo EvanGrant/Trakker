@@ -97,5 +97,13 @@
         android:textColorHint="@color/black"
         android:textSize="10dp" />
 
+    <ImageView
+        android:id="@+id/testImageView"
+        android:layout_width="108dp"
+        android:layout_height="113dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/baseline_person_24" />
+
 
 </RelativeLayout>

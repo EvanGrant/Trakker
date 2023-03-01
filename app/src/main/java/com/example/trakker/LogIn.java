@@ -4,8 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 public class LogIn extends AppCompatActivity {
 
@@ -13,17 +24,30 @@ public class LogIn extends AppCompatActivity {
 
     Button createacctbutton;
 
+    ImageView testImageView;
+
+
+    //test image retrieval with volley and api
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
+    private String url = "https://image.tmdb.org/t/p/w500//hZkgoQYus5vegHoetLkCJzb17zJ.jpg";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        getData();
+
         signinbutton = findViewById(R.id.signInBtn);
 
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
+        testImageView = findViewById(R.id.testImageView);
 
 
+        Picasso.get().load(url).into(testImageView);
 
 
         signinbutton.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +64,27 @@ public class LogIn extends AppCompatActivity {
                 view.getContext().startActivity(intent);}
         });
 
+    }
+
+    private void getData() {
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
     }
 
 
