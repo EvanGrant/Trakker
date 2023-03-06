@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Trakker"
         tools:targetApi="32">
         <activity
+            android:name=".SearchPage"
+            android:exported="false" />
+        <activity
             android:name=".UserAccountPage"
             android:exported="false" />
         <activity

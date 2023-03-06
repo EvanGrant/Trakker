@@ -16,9 +16,6 @@
         android:background="@color/black" />
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAnimals"
         android:layout_width="325dp"

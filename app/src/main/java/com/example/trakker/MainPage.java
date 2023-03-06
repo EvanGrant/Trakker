@@ -114,6 +114,10 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
                     case R.id.MainPage:
                         return true;
 
+                    case R.id.Search:
+                        startActivity(new Intent(getApplicationContext(),SearchPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
 
 
                 }
@@ -134,15 +138,18 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         mRequestQueue = Volley.newRequestQueue(this);
 
         // String Request initialized
-        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>()
+        {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response)
+            {
 
                 Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
                 Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
             }
         });
