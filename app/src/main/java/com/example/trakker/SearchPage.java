@@ -2,23 +2,59 @@ package com.example.trakker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class SearchPage extends AppCompatActivity {
+
+/*
+
+    private RecyclerView mRecyclerView;
+    private ExampleAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+*/
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
 
+    /*
 
+        buildRecyclerView();
 
+        EditText searchEditText = findViewById(R.id.searchEditText);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+    */
 
         // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -58,4 +94,30 @@ public class SearchPage extends AppCompatActivity {
 
 
     }
+
+    /*
+    private void filter(String text) {
+        ArrayList<ExampleItem> filteredList = new ArrayList<>();
+
+        for (ExampleItem item : mExampleList) {
+            if (item.getText1().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        mAdapter.filterList(filteredList);
+    }
+
+
+    private void buildRecyclerView() {
+        mRecyclerView = findViewById(R.id.searchRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new ExampleAdapter(mExampleList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+    */
+
 }
