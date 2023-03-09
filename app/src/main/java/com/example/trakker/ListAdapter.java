@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class ListAdapter extends BaseAdapter {
 
@@ -48,7 +49,15 @@ public class ListAdapter extends BaseAdapter {
 
             convertView= inflator.inflate(R.layout.activity_list_page, null);
 
-            return null;
+            TextView txtView = (TextView) convertView.findViewById(R.id.Listtext);
+            txtView.setText(ListUser[i]);
+            return convertView;
+
+
+
+
+
+
         }
 
 }
