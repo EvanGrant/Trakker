@@ -27,10 +27,12 @@ public class LogIn extends AppCompatActivity {
     ImageView testImageView;
 
 
+/*
     //test image retrieval with volley and api
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     private String url = "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg";
+*/
 
 
     @Override
@@ -38,16 +40,17 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        getData();
-
         signinbutton = findViewById(R.id.signInBtn);
 
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
+
+
+        /*
+        getData();
         testImageView = findViewById(R.id.testImageView);
-
-
         Picasso.get().load(url).into(testImageView);
+        */
 
 
         signinbutton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +68,7 @@ public class LogIn extends AppCompatActivity {
         });
 
     }
+/*
 
     private void getData() {
         // RequestQueue initialized
@@ -86,6 +90,7 @@ public class LogIn extends AppCompatActivity {
 
         mRequestQueue.add(mStringRequest);
     }
+*/
 
 
 }
