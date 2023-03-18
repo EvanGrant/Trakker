@@ -38,7 +38,7 @@
         android:layout_marginTop="293dp" />
 
     <TextView
-        android:id="@+id/textViewTopRatedShows"
+        android:id="@+id/textViewNewReleases"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -46,7 +46,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="485dp"
         android:background="@color/darkgrey"
-        android:text="Top Rated Movies"
+        android:text="New Releases"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp" />
@@ -62,7 +62,7 @@
         android:layout_marginTop="513dp" />
 
     <TextView
-        android:id="@+id/textViewRecentSearch"
+        android:id="@+id/textViewTopRatedMovies"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -70,13 +70,13 @@
         android:layout_marginStart="-1dp"
         android:layout_marginTop="61dp"
         android:background="@color/darkgrey"
-        android:text="Recent Searches"
+        android:text="Top Rated Movies"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textViewTopRatedMovies"
+        android:id="@+id/textViewPopularMovies"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -84,7 +84,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="263dp"
         android:background="@color/darkgrey"
-        android:text="Top Rated Movies"
+        android:text="Popular Movies"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20dp" />

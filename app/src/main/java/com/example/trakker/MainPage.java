@@ -57,12 +57,12 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         viewColors.add(Color.RED);
         viewColors.add(Color.BLACK);
 
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
+        ArrayList<String> movieNames = new ArrayList<>();
+        movieNames.add("Horse");
+        movieNames.add("Cow");
+        movieNames.add("Camel");
+        movieNames.add("Sheep");
+        movieNames.add("Goat");
 
 
         // set up the RecyclerView
@@ -70,7 +70,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter = new MyRecyclerViewAdapter(this, viewColors, movieNames);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
@@ -79,7 +79,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         LinearLayoutManager horizontalLayoutManager2
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(horizontalLayoutManager2);
-        adapter2 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter2 = new MyRecyclerViewAdapter(this, viewColors, movieNames);
         adapter2.setClickListener(this);
         recyclerView2.setAdapter(adapter2);
 
@@ -88,7 +88,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         LinearLayoutManager horizontalLayoutManager3
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView3.setLayoutManager(horizontalLayoutManager3);
-        adapter3 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
+        adapter3 = new MyRecyclerViewAdapter(this, viewColors, movieNames);
         adapter3.setClickListener(this);
         recyclerView3.setAdapter(adapter3);
 
