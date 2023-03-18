@@ -74,7 +74,6 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-
         // set up the RecyclerView
         RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
         LinearLayoutManager horizontalLayoutManager2
