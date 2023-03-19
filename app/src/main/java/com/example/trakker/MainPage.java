@@ -25,71 +25,25 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-    private MyRecyclerViewAdapter firstAdapter;
-    private MyRecyclerViewAdapter adapter2;
-    private MyRecyclerViewAdapter adapter3;
+public class MainPage extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     private String url = "https://api.themoviedb.org/3/movie/top_rated?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
-
+    private static final String TAG = "MainPage";
+    //vars
+    private ArrayList<String> movieTitleArray = new ArrayList<>();
+    private ArrayList<String> moviePosterArray = new ArrayList<>();
+    private ArrayList<String> movieIDArray = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
         getData();
-
-        // data to populate the RecyclerView with
-        List<String> viewTopRatedMovies = new ArrayList<>();
-
-        viewTopRatedMovies.add("BLUE");
-        viewTopRatedMovies.add("Color.YELLOW");
-        viewTopRatedMovies.add("Color.MAGENTA");
-        viewTopRatedMovies.add("Color.RED");
-        viewTopRatedMovies.add("Color.BLACK");
-
-
-        ArrayList<String> movieNames = new ArrayList<>();
-        movieNames.add("Horse");
-        movieNames.add("Cow");
-        movieNames.add("Camel");
-        movieNames.add("Sheep");
-        movieNames.add("Goat");
-
-
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        firstAdapter = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
-        firstAdapter.setClickListener(this);
-        recyclerView.setAdapter(firstAdapter);
-
-        /*
-
-        // set up the RecyclerView
-        RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
-        LinearLayoutManager horizontalLayoutManager2
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView2.setLayoutManager(horizontalLayoutManager2);
-        adapter2 = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
-        adapter2.setClickListener(this);
-        recyclerView2.setAdapter(adapter2);
-
-        // set up the RecyclerView
-        RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
-        LinearLayoutManager horizontalLayoutManager3
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView3.setLayoutManager(horizontalLayoutManager3);
-        adapter3 = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
-        adapter3.setClickListener(this);
-        recyclerView3.setAdapter(adapter3);
-
-        */
 
         // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -126,12 +80,15 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         });
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + firstAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-    }
-
     private void getData() {
+
+        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        /*
+        moviePosterArray.add("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
+        movieTitleArray.add("Havasu Falls");
+        */
+
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
@@ -141,7 +98,38 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
             @Override
             public void onResponse(String response)
             {
+
                 Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+
+                Log.e("Res: ", response);
+                try
+                {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject movie = jsonArray.getJSONObject(i);
+
+                            String movieID = movie.getString("id");
+                            String movieTitle = movie.getString("original_title");
+                            String moviePoster = movie.getString("poster_path");
+
+                            movieIDArray.add(movieID);
+                            movieTitleArray.add(movieTitle);
+                            moviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -152,8 +140,29 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         });
 
         mRequestQueue.add(mStringRequest);
+
+
+
+        initRecyclerView();
+
     }
 
+    private void initRecyclerView(){
+        Log.d(TAG, "initRecyclerView: init recyclerview");
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        recyclerView.setLayoutManager(layoutManager);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, movieTitleArray, moviePosterArray);
+        recyclerView.setAdapter(adapter);
+
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
+        recyclerView2.setLayoutManager(layoutManager2);
+        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, movieTitleArray, moviePosterArray);
+        recyclerView2.setAdapter(adapter2);
+    }
 }
+
 
 

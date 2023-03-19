@@ -16,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,11 +87,13 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     movieID = ID;
                     posterURL = URL;
                     backdropURL = backdrop;
+/*
 
                     // we are using picasso to load the image from url.
                     Picasso.get().load("https://image.tmdb.org/t/p/w500/" + posterURL).into(moviePoster);
 
                     Picasso.get().load("https://image.tmdb.org/t/p/w500/" + backdropURL).into(movieBackdrop);
+*/
 
                 } catch (JSONException e) {
                     // if we do not extract data from json object properly.
