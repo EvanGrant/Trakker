@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,12 +43,14 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         getData();
 
         // data to populate the RecyclerView with
-        ArrayList<Integer> viewTopRatedMovies = new ArrayList<>();
-        viewTopRatedMovies.add(Color.BLUE);
-        viewTopRatedMovies.add(Color.YELLOW);
-        viewTopRatedMovies.add(Color.MAGENTA);
-        viewTopRatedMovies.add(Color.RED);
-        viewTopRatedMovies.add(Color.BLACK);
+        List<String> viewTopRatedMovies = new ArrayList<>();
+
+        viewTopRatedMovies.add("BLUE");
+        viewTopRatedMovies.add("Color.YELLOW");
+        viewTopRatedMovies.add("Color.MAGENTA");
+        viewTopRatedMovies.add("Color.RED");
+        viewTopRatedMovies.add("Color.BLACK");
+
 
         ArrayList<String> movieNames = new ArrayList<>();
         movieNames.add("Horse");
@@ -138,7 +141,6 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
             @Override
             public void onResponse(String response)
             {
-
                 Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
             }
         }, new Response.ErrorListener() {

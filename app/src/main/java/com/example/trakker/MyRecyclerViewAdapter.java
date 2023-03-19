@@ -18,13 +18,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
 
-    private List<Integer> mViewColors;
+    private List<String> mViewColors;
     private List<String> mAnimals;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<Integer> colors, List<String> animals) {
+    MyRecyclerViewAdapter(Context context, List<String> colors, List<String> animals) {
         this.mInflater = LayoutInflater.from(context);
         this.mViewColors = colors;
         this.mAnimals = animals;
@@ -41,16 +41,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int color = mViewColors.get(position);
+        String color = mViewColors.get(position);
         String animal = mAnimals.get(position);
-        holder.moviePosterView.setBackgroundColor(color);
         holder.myTextView.setText(animal);
 
-        /*
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg")
+                .load(mViewColors.get(position))
                 .into(holder.moviePosterView);
-        */
+
     }
 
     // total number of rows
