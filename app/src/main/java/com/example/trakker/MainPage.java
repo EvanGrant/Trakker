@@ -11,18 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,13 +26,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
-    private MyRecyclerViewAdapter adapter;
+    private MyRecyclerViewAdapter firstAdapter;
     private MyRecyclerViewAdapter adapter2;
     private MyRecyclerViewAdapter adapter3;
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "https://api.themoviedb.org/3/movie/550?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
+    private String url = "https://api.themoviedb.org/3/movie/top_rated?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +42,12 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         getData();
 
         // data to populate the RecyclerView with
-        ArrayList<Integer> viewColors = new ArrayList<>();
-        viewColors.add(Color.BLUE);
-        viewColors.add(Color.YELLOW);
-        viewColors.add(Color.MAGENTA);
-        viewColors.add(Color.RED);
-        viewColors.add(Color.BLACK);
+        ArrayList<Integer> viewTopRatedMovies = new ArrayList<>();
+        viewTopRatedMovies.add(Color.BLUE);
+        viewTopRatedMovies.add(Color.YELLOW);
+        viewTopRatedMovies.add(Color.MAGENTA);
+        viewTopRatedMovies.add(Color.RED);
+        viewTopRatedMovies.add(Color.BLACK);
 
         ArrayList<String> movieNames = new ArrayList<>();
         movieNames.add("Horse");
@@ -70,16 +62,18 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new MyRecyclerViewAdapter(this, viewColors, movieNames);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+        firstAdapter = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
+        firstAdapter.setClickListener(this);
+        recyclerView.setAdapter(firstAdapter);
+
+        /*
 
         // set up the RecyclerView
         RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
         LinearLayoutManager horizontalLayoutManager2
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(horizontalLayoutManager2);
-        adapter2 = new MyRecyclerViewAdapter(this, viewColors, movieNames);
+        adapter2 = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
         adapter2.setClickListener(this);
         recyclerView2.setAdapter(adapter2);
 
@@ -88,9 +82,11 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         LinearLayoutManager horizontalLayoutManager3
                 = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView3.setLayoutManager(horizontalLayoutManager3);
-        adapter3 = new MyRecyclerViewAdapter(this, viewColors, movieNames);
+        adapter3 = new MyRecyclerViewAdapter(this, viewTopRatedMovies, movieNames);
         adapter3.setClickListener(this);
         recyclerView3.setAdapter(adapter3);
+
+        */
 
         // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -129,7 +125,7 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You clicked " + firstAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
     private void getData() {
