@@ -99,9 +99,9 @@ public class MainPage extends AppCompatActivity {
             public void onResponse(String response)
             {
 
-                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
-
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
                 Log.e("Res: ", response);
+
                 try
                 {
 
@@ -148,7 +148,8 @@ public class MainPage extends AppCompatActivity {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
+
+        //Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.rvAnimals);
