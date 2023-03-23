@@ -2,6 +2,7 @@ package com.example.trakker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,6 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "https://api.themoviedb.org/3/movie/550?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
 
     @Override
@@ -43,7 +43,10 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_tvshow_display_page);
 
-        getData();
+        Intent intent = getIntent();
+        String ID = intent.getStringExtra("id");
+
+        getData(ID);
 
         movieName = findViewById(R.id.movieNameTextView);
         moviePoster = findViewById(R.id.moviePosterImageView);
@@ -52,7 +55,9 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
     }
 
-    private void getData() {
+    private void getData(String id) {
+
+        String url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);

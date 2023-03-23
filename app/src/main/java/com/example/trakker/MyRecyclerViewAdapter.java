@@ -1,6 +1,7 @@
 package com.example.trakker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 Log.d(TAG, "onClick: clicked on an image: " + mNames.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
                 Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
 
+                String passedID = mIDs.get(holder.getAbsoluteAdapterPosition());
 
+                passData(passedID, mContext);
 
             }
         });
@@ -81,5 +84,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             name = itemView.findViewById(R.id.name);
         }
     }
+
+    private void passData(String id, Context context) {
+
+        Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
+        intent.putExtra("id", id);
+        context.startActivity(intent);
+
+    }
+
+
 
 }
