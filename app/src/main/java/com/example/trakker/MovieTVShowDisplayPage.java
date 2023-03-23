@@ -51,13 +51,6 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         movieOverview = findViewById(R.id.movieOverViewTextView);
         movieBackdrop = findViewById(R.id.movieBackdropImageView);
 
-        Glide.with(getApplicationContext())
-                .load("https://image.tmdb.org/t/p/w500/" + posterURL)
-                .into(moviePoster);
-
-        Glide.with(getApplicationContext())
-                .load("https://image.tmdb.org/t/p/w500/" + backdropURL)
-                .into(movieBackdrop);
 
     }
 
@@ -71,15 +64,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                /*
-                // inside the on response method.
-                // we are hiding our progress bar.
-                loadingPB.setVisibility(View.GONE);
 
-                // in below line we are making our card
-                // view visible after we get all the data.
-                courseCV.setVisibility(View.VISIBLE);
-                */
                 try {
                     // now we get our response from API in json object format.
                     // in below line we are extracting a string with its key
@@ -99,13 +84,13 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     posterURL = URL;
                     backdropURL = backdrop;
 
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + posterURL)
+                            .into(moviePoster);
 
-
-
-                    // we are using picasso to load the image from url.
-                    //Picasso.get().load("https://image.tmdb.org/t/p/w500/" + posterURL).into(moviePoster);
-
-                    //Picasso.get().load("https://image.tmdb.org/t/p/w500/" + backdropURL).into(movieBackdrop);
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + backdropURL)
+                            .into(movieBackdrop);
 
 
                 } catch (JSONException e) {
