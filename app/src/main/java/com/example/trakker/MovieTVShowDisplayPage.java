@@ -2,6 +2,7 @@ package com.example.trakker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +17,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,14 +30,10 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
     private ImageView moviePoster, movieBackdrop;
 
     String movieID;
-
     String posterURL;
-
     String backdropURL;
-
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "https://api.themoviedb.org/3/movie/550?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
 
     @Override
@@ -43,16 +41,22 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_tvshow_display_page);
 
-        getData();
+        Intent intent = getIntent();
+        String ID = intent.getStringExtra("id");
+
+        getData(ID);
 
         movieName = findViewById(R.id.movieNameTextView);
         moviePoster = findViewById(R.id.moviePosterImageView);
         movieOverview = findViewById(R.id.movieOverViewTextView);
         movieBackdrop = findViewById(R.id.movieBackdropImageView);
 
+
     }
 
-    private void getData() {
+    private void getData(String id) {
+
+        String url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
@@ -60,15 +64,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                /*
-                // inside the on response method.
-                // we are hiding our progress bar.
-                loadingPB.setVisibility(View.GONE);
 
-                // in below line we are making our card
-                // view visible after we get all the data.
-                courseCV.setVisibility(View.VISIBLE);
-                */
                 try {
                     // now we get our response from API in json object format.
                     // in below line we are extracting a string with its key
@@ -88,10 +84,14 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     posterURL = URL;
                     backdropURL = backdrop;
 
-                    // we are using picasso to load the image from url.
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500/" + posterURL).into(moviePoster);
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + posterURL)
+                            .into(moviePoster);
 
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500/" + backdropURL).into(movieBackdrop);
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + backdropURL)
+                            .into(movieBackdrop);
+
 
                 } catch (JSONException e) {
                     // if we do not extract data from json object properly.

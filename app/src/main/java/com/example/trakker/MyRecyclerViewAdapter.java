@@ -1,86 +1,98 @@
 package com.example.trakker;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = "RecyclerViewAdapter";
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<String> mIDs = new ArrayList<>();
 
 
-    private List<Integer> mViewColors;
-    private List<String> mAnimals;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private Context mContext;
 
-    // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<Integer> colors, List<String> animals) {
-        this.mInflater = LayoutInflater.from(context);
-        this.mViewColors = colors;
-        this.mAnimals = animals;
+    public MyRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> ids) {
+        mNames = names;
+        mImageUrls = imageUrls;
+        mContext = context;
+        mIDs = ids;
+
     }
 
-    // inflates the row layout from xml when needed
     @Override
-    @NonNull
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
         return new ViewHolder(view);
     }
 
-    // binds the data to the view and textview in each row
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int color = mViewColors.get(position);
-        String animal = mAnimals.get(position);
-        holder.myView.setBackgroundColor(color);
-        holder.myTextView.setText(animal);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Log.d(TAG, "onBindViewHolder: called.");
+
+
+        Glide.with(mContext)
+                .asBitmap()
+                .load(mImageUrls.get(position))
+                .override(90,100)
+                .into(holder.image);
+
+
+        holder.name.setText(mNames.get(position));
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on an image: " + mNames.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
+                Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                String passedID = mIDs.get(holder.getAbsoluteAdapterPosition());
+
+                passData(passedID, mContext);
+
+            }
+        });
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
-        return mAnimals.size();
+        return mImageUrls.size();
     }
 
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        View myView;
-        TextView myTextView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ViewHolder(View itemView) {
+        ImageView image;
+        TextView name;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            myView = itemView.findViewById(R.id.colorView);
-            myTextView = itemView.findViewById(R.id.tvAnimalName);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            image = itemView.findViewById(R.id.image_view);
+            name = itemView.findViewById(R.id.name);
         }
     }
 
-    // convenience method for getting data at click position
-    public String getItem(int id) {
-        return mAnimals.get(id);
+    private void passData(String id, Context context) {
+
+        Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
+        intent.putExtra("id", id);
+        context.startActivity(intent);
+
     }
 
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
 
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
 
 }

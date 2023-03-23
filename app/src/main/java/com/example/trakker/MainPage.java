@@ -6,23 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,65 +20,42 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-    private MyRecyclerViewAdapter adapter;
-    private MyRecyclerViewAdapter adapter2;
-    private MyRecyclerViewAdapter adapter3;
+public class MainPage extends AppCompatActivity {
+
+    private static final String TAG = "MainPage";
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "https://api.themoviedb.org/3/movie/550?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
+
+
+    private String topRatedMoviesUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
+    private ArrayList<String> topRatedMovieTitleArray = new ArrayList<>();
+    private ArrayList<String> topRatedMoviePosterArray = new ArrayList<>();
+    private ArrayList<String> topRatedMoviesIDArray = new ArrayList<>();
+
+
+    private String popularMoviesUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
+    private ArrayList<String> popularMovieTitleArray = new ArrayList<>();
+    private ArrayList<String> popularMoviePosterArray = new ArrayList<>();
+    private ArrayList<String> popularMoviesIDArray = new ArrayList<>();
+
+
+    private String newReleasesMoviesUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
+    private ArrayList<String> newReleasesMovieTitleArray = new ArrayList<>();
+    private ArrayList<String> newReleasesMoviePosterArray = new ArrayList<>();
+    private ArrayList<String> newReleasesMoviesIDArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        getData();
-
-        // data to populate the RecyclerView with
-        ArrayList<Integer> viewColors = new ArrayList<>();
-        viewColors.add(Color.BLUE);
-        viewColors.add(Color.YELLOW);
-        viewColors.add(Color.MAGENTA);
-        viewColors.add(Color.RED);
-        viewColors.add(Color.BLACK);
-
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
-
-
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new MyRecyclerViewAdapter(this, viewColors, animalNames);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
-
-        // set up the RecyclerView
-        RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
-        LinearLayoutManager horizontalLayoutManager2
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView2.setLayoutManager(horizontalLayoutManager2);
-        adapter2 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
-        adapter2.setClickListener(this);
-        recyclerView2.setAdapter(adapter2);
-
-        // set up the RecyclerView
-        RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
-        LinearLayoutManager horizontalLayoutManager3
-                = new LinearLayoutManager(MainPage.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView3.setLayoutManager(horizontalLayoutManager3);
-        adapter3 = new MyRecyclerViewAdapter(this, viewColors, animalNames);
-        adapter3.setClickListener(this);
-        recyclerView3.setAdapter(adapter3);
+        getDataTopRatedMovies();
+        getDataPopularMovies();
+        getNewReleasesMovies();
 
         // Initialize and assign bottom navigation view
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -127,23 +92,56 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         });
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-    }
+    private void getDataTopRatedMovies() {
 
-    private void getData() {
+        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        /*
+        moviePosterArray.add("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
+        movieTitleArray.add("Havasu Falls");
+        */
+
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
         // String Request initialized
-        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>()
+        mStringRequest = new StringRequest(Request.Method.GET, topRatedMoviesUrl, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)
             {
 
-                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                Log.e("Res: ", response);
+
+                try
+                {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject movie = jsonArray.getJSONObject(i);
+
+                            String movieID = movie.getString("id");
+                            String movieTitle = movie.getString("original_title");
+                            String moviePoster = movie.getString("poster_path");
+
+                            topRatedMoviesIDArray.add(movieID);
+                            topRatedMovieTitleArray.add(movieTitle);
+                            topRatedMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -154,8 +152,170 @@ public class MainPage extends AppCompatActivity implements MyRecyclerViewAdapter
         });
 
         mRequestQueue.add(mStringRequest);
+
+
+
+        initRecyclerView();
+
     }
 
+    private void getDataPopularMovies() {
+
+        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        /*
+        moviePosterArray.add("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
+        movieTitleArray.add("Havasu Falls");
+        */
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, popularMoviesUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                Log.e("Res: ", response);
+
+                try
+                {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject movie = jsonArray.getJSONObject(i);
+
+                            String movieID = movie.getString("id");
+                            String movieTitle = movie.getString("original_title");
+                            String moviePoster = movie.getString("poster_path");
+
+                            popularMoviesIDArray.add(movieID);
+                            popularMovieTitleArray.add(movieTitle);
+                            popularMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
+
+        initRecyclerView();
+
+    }
+
+    private void getNewReleasesMovies() {
+
+        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        /*
+        moviePosterArray.add("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
+        movieTitleArray.add("Havasu Falls");
+        */
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, newReleasesMoviesUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                Log.e("Res: ", response);
+
+                try
+                {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("results");
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject movie = jsonArray.getJSONObject(i);
+
+                            String movieID = movie.getString("id");
+                            String movieTitle = movie.getString("original_title");
+                            String moviePoster = movie.getString("poster_path");
+
+                            newReleasesMoviesIDArray.add(movieID);
+                            newReleasesMovieTitleArray.add(movieTitle);
+                            newReleasesMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
+
+        initRecyclerView();
+
+    }
+
+    private void initRecyclerView(){
+
+        //Log.d(TAG, "initRecyclerView: init recyclerview");
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        recyclerView.setLayoutManager(layoutManager);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray);
+        recyclerView.setAdapter(adapter);
+
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
+        recyclerView2.setLayoutManager(layoutManager2);
+        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, popularMovieTitleArray, popularMoviePosterArray, popularMoviesIDArray);
+        recyclerView2.setAdapter(adapter2);
+
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
+        recyclerView3.setLayoutManager(layoutManager3);
+        MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray, newReleasesMoviesIDArray);
+        recyclerView3.setAdapter(adapter3);
+    }
 }
+
 
 
