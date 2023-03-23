@@ -300,19 +300,19 @@ public class MainPage extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.rvAnimals);
         recyclerView.setLayoutManager(layoutManager);
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
         recyclerView2.setLayoutManager(layoutManager2);
-        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, popularMovieTitleArray, popularMoviePosterArray);
+        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, popularMovieTitleArray, popularMoviePosterArray, popularMoviesIDArray);
         recyclerView2.setAdapter(adapter2);
 
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
         recyclerView3.setLayoutManager(layoutManager3);
-        MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray);
+        MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray, newReleasesMoviesIDArray);
         recyclerView3.setAdapter(adapter3);
     }
 }
