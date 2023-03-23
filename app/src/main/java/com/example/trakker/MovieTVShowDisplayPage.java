@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 
 import org.json.JSONArray;
@@ -29,11 +30,8 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
     private ImageView moviePoster, movieBackdrop;
 
     String movieID;
-
     String posterURL;
-
     String backdropURL;
-
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
@@ -52,6 +50,14 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         moviePoster = findViewById(R.id.moviePosterImageView);
         movieOverview = findViewById(R.id.movieOverViewTextView);
         movieBackdrop = findViewById(R.id.movieBackdropImageView);
+
+        Glide.with(getApplicationContext())
+                .load("https://image.tmdb.org/t/p/w500/" + posterURL)
+                .into(moviePoster);
+
+        Glide.with(getApplicationContext())
+                .load("https://image.tmdb.org/t/p/w500/" + backdropURL)
+                .into(movieBackdrop);
 
     }
 
@@ -92,13 +98,15 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     movieID = ID;
                     posterURL = URL;
                     backdropURL = backdrop;
-/*
+
+
+
 
                     // we are using picasso to load the image from url.
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500/" + posterURL).into(moviePoster);
+                    //Picasso.get().load("https://image.tmdb.org/t/p/w500/" + posterURL).into(moviePoster);
 
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500/" + backdropURL).into(movieBackdrop);
-*/
+                    //Picasso.get().load("https://image.tmdb.org/t/p/w500/" + backdropURL).into(movieBackdrop);
+
 
                 } catch (JSONException e) {
                     // if we do not extract data from json object properly.
