@@ -18,8 +18,6 @@ import java.util.ArrayList;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
-
-    //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private Context mContext;
@@ -55,6 +53,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + mNames.get(holder.getAbsoluteAdapterPosition()));
                 Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
     }
