@@ -17,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 public class LogIn extends AppCompatActivity {
 
     Button signinbutton;
@@ -41,7 +40,9 @@ public class LogIn extends AppCompatActivity {
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
         /*
+
         getData();
+
         testImageView = findViewById(R.id.testImageView);
         Picasso.get().load(url).into(testImageView);
         */

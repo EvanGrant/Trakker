@@ -161,13 +161,6 @@ public class MainPage extends AppCompatActivity {
 
     private void getDataPopularMovies() {
 
-        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        /*
-        moviePosterArray.add("https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg");
-        movieTitleArray.add("Havasu Falls");
-        */
-
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
