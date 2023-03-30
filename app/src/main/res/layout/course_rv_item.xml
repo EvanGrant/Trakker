@@ -6,13 +6,17 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="8dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    android:backgroundTint="@color/black"
+    android:background="@drawable/item_border">
+
+    <!-- SEARCH PAGE RECYCLERVIEW -->
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- text view for our course name -->
+
         <TextView
             android:id="@+id/idTVCourseName"
             android:layout_width="match_parent"
@@ -20,7 +24,7 @@
             android:layout_marginStart="60dp"
             android:padding="8dp"
             android:text="Course Name"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <!-- text view for our course description -->
@@ -32,7 +36,7 @@
             android:layout_below="@id/idTVCourseName"
             android:padding="5dp"
             android:text="Course Description"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <ImageView
             android:id="@+id/idTVPosterImageView"
