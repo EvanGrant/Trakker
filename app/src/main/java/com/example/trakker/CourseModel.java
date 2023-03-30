@@ -14,7 +14,7 @@ public class CourseModel {
     public CourseModel(String courseName, String courseDescription, String poster, String backdrop) {
         this.courseName = courseName;
         this.courseDescription = courseDescription;
-        this.Poster = poster;
+        this.Poster = "https://image.tmdb.org/t/p/w500/" + poster;
         this.Backdrop = backdrop;
     }
 
