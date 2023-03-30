@@ -23,7 +23,7 @@
             android:name=".MovieTVShowDisplayPage"
             android:exported="false" />
         <activity
-            android:name=".SearchPage"
+            android:name=".SearchPagePackage.SearchPage"
             android:exported="false" />
         <activity
             android:name=".UserAccountPage"

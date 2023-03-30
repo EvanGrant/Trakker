@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/stockpurplebkgrdphoto"
+    android:background="@color/darkgrey"
     tools:context=".LogIn">
 
 
@@ -19,12 +19,12 @@
         android:layout_marginTop="106dp"
         android:text="Log In"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="38dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <EditText
-
         android:id="@+id/usernamelogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:background="@color/white"
-
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="160dp" />
+        tools:layout_editor_absoluteY="160dp"
+        />
 
     <EditText
 
@@ -56,46 +56,45 @@
         tools:layout_editor_absoluteY="300dp" />
 
     <Button
-        android:id="@+id/signInBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/passwordlogin"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="117dp"
-        android:layout_marginEnd="143dp"
-        android:gravity="center"
-        android:text="SIGN IN"
-        android:textColorHint="@color/black" />
-
-    <Button
         android:id="@+id/CreateacctBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="119dp"
-        android:layout_marginBottom="9dp"
-        android:text="CREATE ACCOUNT"
+        android:layout_marginBottom="249dp"
         android:gravity="center"
-        android:textColorHint="@color/black" />
+        android:text="CREATE ACCOUNT"
+        android:textColorHint="@color/black"
+        android:textSize="10dp" />
 
     <Button
         android:id="@+id/forgotpassBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="256dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="315dp"
+        android:layout_marginStart="-4dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="306dp"
         android:gravity="center"
         android:text="Forgot Password?"
         android:textColorHint="@color/black"
         android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/signInBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="SIGN IN"
+        android:textColorHint="@color/black" />
 
 
 </RelativeLayout>
