@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class MainPage extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
+
+    private Button ListsButton;
 
 
     private String topRatedMoviesUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
@@ -63,6 +67,15 @@ public class MainPage extends AppCompatActivity {
 
         // Set Home selected
         bottomNavigationView.setSelectedItemId(R.id.MainPage);
+
+        ListsButton = findViewById(R.id.myListsButton);
+
+        ListsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ListPage.class);
+                view.getContext().startActivity(intent);}
+        });
 
         // Perform item selected listener for bottom navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

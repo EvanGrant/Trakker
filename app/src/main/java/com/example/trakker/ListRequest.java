@@ -1,5 +1,6 @@
 package com.example.trakker;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -8,7 +9,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,18 +24,20 @@ public class ListRequest {
      *
      * */
 
-    private MainPage context;
-    private JSONObject returnObject;
+    //private MainPage context;
+    private JSONArray returnObject;
 
-    public JSONObject GetAllLists(int userID){
+    public JSONArray GetAllLists(int userID, Context mContext){
 
         RequestQueue mRequestQueue;
         StringRequest mStringRequest;
 
         // RequestQueue initialized
-        mRequestQueue = Volley.newRequestQueue(context);
+        mRequestQueue = Volley.newRequestQueue(mContext);
 
-        String RESTUrl = "localhost:4000/lists/" + Integer.toString(userID);
+        //String RESTUrl = "localhost:4000/lists/" + userID;
+
+        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
 
         // String Request initialized
         mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
@@ -46,7 +48,7 @@ public class ListRequest {
                 try
                 {
 
-                    returnObject = new JSONObject(response);
+                    returnObject = new JSONArray(response);
 
                 }
                 catch (Exception e)
@@ -62,9 +64,13 @@ public class ListRequest {
             }
         });
 
+        mRequestQueue.add(mStringRequest);
+
         return returnObject;
 
+
     }
+
 
 
 }

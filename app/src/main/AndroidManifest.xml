@@ -29,6 +29,9 @@
             android:name=".UserAccountPage"
             android:exported="false" />
         <activity
+            android:name=".ListPage"
+            android:exported="false" />
+        <activity
             android:name=".MainPage"
             android:exported="true">
             <meta-data

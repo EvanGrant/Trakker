@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.example.trakker.ListRequest;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,10 +18,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class LogIn extends AppCompatActivity {
 
     Button signinbutton;
-
     Button createacctbutton;
 
 /*
@@ -40,12 +43,12 @@ public class LogIn extends AppCompatActivity {
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
         /*
-
         getData();
-
         testImageView = findViewById(R.id.testImageView);
         Picasso.get().load(url).into(testImageView);
         */
+
+        SQLRequest();
 
         signinbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,31 @@ public class LogIn extends AppCompatActivity {
         });
 
     }
+
+
+    void SQLRequest()
+    {
+
+        JSONArray jsonArray = new JSONArray();
+
+
+
+        ListRequest Request = new ListRequest();
+        jsonArray = Request.GetAllLists(1, this);
+
+        Toast.makeText(this, "SQLRequest: " + jsonArray, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+
+
+    }
+
+
 /*
 
     private void getData() {
