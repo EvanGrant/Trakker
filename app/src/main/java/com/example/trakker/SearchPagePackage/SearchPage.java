@@ -32,32 +32,21 @@ import java.util.ArrayList;
 
 public class SearchPage extends AppCompatActivity {
 
-
     // creating variables for
     // our ui components.
     private RecyclerView courseRV;
-
     // variable for our adapter
     // class and array list
     private CourseAdapter adapter;
     private ArrayList<CourseModel> courseModelArrayList;
-
-
     ArrayList<String> movieIDArray = new ArrayList<>();
     ArrayList<String> movieTitleArray = new ArrayList<>();
     ArrayList<String> moviePosterArray = new ArrayList<>();
-
     ArrayList<String> movieBackDropArray = new ArrayList<>();
-
-
-
-
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
     private String url = "https://api.themoviedb.org/3/search/multi?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&query=Batman&page=1&include_adult=false";
-
-    String searchkey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,7 +239,7 @@ public class SearchPage extends AppCompatActivity {
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
                             }
                             else if (mediatype.equals("tv"))
                             {
@@ -264,7 +253,7 @@ public class SearchPage extends AppCompatActivity {
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
                             }
                             else if (mediatype.equals("person"))
                             {

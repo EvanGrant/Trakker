@@ -2,15 +2,20 @@ package com.example.trakker.SearchPagePackage;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.trakker.MovieTVShowDisplayPage;
 import com.example.trakker.R;
 
 import java.util.ArrayList;
@@ -19,6 +24,8 @@ import java.util.ArrayList;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
     private ArrayList<CourseModel> courseModelArrayList;
+
+    private static final String TAG = "CourseAdapter";
     private Context mContext;
     public CourseAdapter(ArrayList<CourseModel> courseModelArrayList, Context context) {
         this.courseModelArrayList = courseModelArrayList;
@@ -56,6 +63,22 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 .override(90,100)
                 .into(holder.coursePosterTV);
 
+        holder.coursePosterTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               //Log.d(TAG, "onClick: clicked on an image: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
+                //Toast.makeText(mContext, holder.courseNameTV.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+                Log.d(TAG, "Clicked on: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()));
+                Log.d(TAG, "Clicked on: " + model.getCourseName());
+
+                String passedID = model.getCourseID();
+
+                passData(passedID, mContext);
+
+            }
+        });
+
     }
 
     @Override
@@ -79,4 +102,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             coursePosterTV = itemView.findViewById(R.id.idTVPosterImageView);
         }
     }
+
+    private void passData(String id, Context context) {
+
+        Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
+        intent.putExtra("id", id);
+        context.startActivity(intent);
+
+    }
+
 }
