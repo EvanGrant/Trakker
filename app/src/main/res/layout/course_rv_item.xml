@@ -17,6 +17,7 @@
             android:id="@+id/idTVCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
             android:padding="8dp"
             android:text="Course Name"
             android:textColor="@color/black"
@@ -27,9 +28,16 @@
             android:id="@+id/idTVCourseDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
             android:layout_below="@id/idTVCourseName"
             android:padding="5dp"
             android:text="Course Description"
             android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/idTVPosterImageView"
+            android:layout_width="61dp"
+            android:layout_height="70dp" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -16,14 +16,14 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+//FOR MAIN PAGE
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mIDs = new ArrayList<>();
-
-
     private Context mContext;
 
     public MyRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> ids) {

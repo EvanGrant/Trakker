@@ -1,15 +1,21 @@
 package com.example.trakker;
 
+//FOR SEARCH PAGE RECYCLERVIEW
+
 public class CourseModel {
     // variables for our course
     // name and description.
     private String courseName;
     private String courseDescription;
+    private String Poster;
+    private String Backdrop;
 
     // creating constructor for our variables.
-    public CourseModel(String courseName, String courseDescription) {
+    public CourseModel(String courseName, String courseDescription, String poster, String backdrop) {
         this.courseName = courseName;
         this.courseDescription = courseDescription;
+        this.Poster = poster;
+        this.Backdrop = backdrop;
     }
 
     // creating getter and setter methods.
@@ -21,6 +27,22 @@ public class CourseModel {
         this.courseName = courseName;
     }
 
+    public String getPoster() {
+        return Poster;
+    }
+
+    public void setPoster(String poster) {
+        this.Poster = poster;
+    }
+
+    public String getBackdrop() {
+        return Backdrop;
+    }
+
+    public void setBackdrop(String backdrop) {
+        this.Backdrop = backdrop;
+    }
+
     public String getCourseDescription() {
         return courseDescription;
     }
@@ -28,4 +50,6 @@ public class CourseModel {
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
     }
+
+
 }

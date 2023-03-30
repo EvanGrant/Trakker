@@ -46,6 +46,10 @@ public class SearchPage extends AppCompatActivity {
     ArrayList<String> movieTitleArray = new ArrayList<>();
     ArrayList<String> moviePosterArray = new ArrayList<>();
 
+    ArrayList<String> movieBackDropArray = new ArrayList<>();
+
+
+
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
@@ -138,14 +142,14 @@ public class SearchPage extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
-                filter(newText);
+                //filter(newText);
                 return false;
             }
         });
         return true;
     }
 
-    private void filter(String text) {
+    /*private void filter(String text) {
         // creating a new array list to filter our data.
         ArrayList<CourseModel> filteredlist = new ArrayList<CourseModel>();
 
@@ -167,7 +171,7 @@ public class SearchPage extends AppCompatActivity {
             // list to our adapter class.
             adapter.filterList(filteredlist);
         }
-    }
+    }*/
 
     private void buildRecyclerView() {
 
@@ -237,26 +241,31 @@ public class SearchPage extends AppCompatActivity {
                                 String movieID = movie.getString("id");
                                 String movieTitle = movie.getString("title");
                                 String moviePoster = movie.getString("poster_path");
+                                String backDropPoster = movie.getString("backdrop_path");
+
 
                                 movieIDArray.add(movieID);
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
+                                movieBackDropArray.add(backDropPoster);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster));
                             }
                             else if (mediatype.equals("tv"))
                             {
                                 String movieID = movie.getString("id");
                                 String movieTitle = movie.getString("name");
                                 String moviePoster = movie.getString("poster_path");
+                                String backDropPoster = movie.getString("backdrop_path");
 
                                 movieIDArray.add(movieID);
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
+                                movieBackDropArray.add(backDropPoster);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster));
                             }
-                            else if (mediatype.equals("tv"))
+                            else if (mediatype.equals("person"))
                             {
                                 continue;
                             }
