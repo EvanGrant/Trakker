@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.SearchPagePackage.SearchPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -79,7 +80,7 @@ public class MainPage extends AppCompatActivity {
                         return true;
 
                     case R.id.Search:
-                        startActivity(new Intent(getApplicationContext(),SearchPage.class));
+                        startActivity(new Intent(getApplicationContext(), SearchPage.class));
                         overridePendingTransition(0,0);
                         return true;
 

@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.SearchPagePackage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.trakker.CourseAdapter;
-import com.example.trakker.CourseModel;
+import com.example.trakker.MainPage;
+import com.example.trakker.R;
+import com.example.trakker.UserAccountPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -95,12 +96,12 @@ public class SearchPage extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.UserAccount:
-                        startActivity(new Intent(getApplicationContext(),UserAccountPage.class));
+                        startActivity(new Intent(getApplicationContext(), UserAccountPage.class));
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.MainPage:
-                        startActivity(new Intent(getApplicationContext(),MainPage.class));
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
                         overridePendingTransition(0,0);
 
                     case R.id.Search:

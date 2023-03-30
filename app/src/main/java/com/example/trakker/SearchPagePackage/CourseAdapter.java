@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.SearchPagePackage;
 
 
 import android.content.Context;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.trakker.R;
 
 import java.util.ArrayList;
 

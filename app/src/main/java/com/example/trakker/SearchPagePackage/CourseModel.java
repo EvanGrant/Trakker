@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.SearchPagePackage;
 
 //FOR SEARCH PAGE RECYCLERVIEW
 
