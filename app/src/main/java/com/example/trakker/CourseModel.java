@@ -15,7 +15,7 @@ public class CourseModel {
         this.courseName = courseName;
         this.courseDescription = courseDescription;
         this.Poster = "https://image.tmdb.org/t/p/w500/" + poster;
-        this.Backdrop = backdrop;
+        this.Backdrop = "https://image.tmdb.org/t/p/w500/" + backdrop;
     }
 
     // creating getter and setter methods.
