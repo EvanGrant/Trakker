@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.APIRequests;
 
 import android.content.Context;
 import android.util.Log;

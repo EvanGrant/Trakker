@@ -4,23 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.trakker.ListRequest;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.trakker.APIRequests.ListRequest;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.ShowListContentsPackage.ShowListContentsPage;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class LogIn extends AppCompatActivity {
 
