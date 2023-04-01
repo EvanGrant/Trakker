@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.ShowListContentsPackage.ShowListContentsPage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class LogIn extends AppCompatActivity {
         createacctbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Registration.class);
+                Intent intent = new Intent(view.getContext(), ShowListContentsPage.class);
                 view.getContext().startActivity(intent);}
         });
 
