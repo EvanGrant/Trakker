@@ -25,7 +25,13 @@ public class ListRequest {
      * */
 
     //private MainPage context;
-    private JSONArray returnObject;
+    //private JSONArray returnObject;
+
+    //public Integer userID;
+    //public String listName;
+   // public Integer listID;
+
+/*
 
     public JSONArray GetAllLists(int userID, Context mContext){
 
@@ -45,16 +51,44 @@ public class ListRequest {
             @Override
             public void onResponse(String response)
             {
+
+                listName = response.toString();
+
+              */
+/*
                 try
+
                 {
 
                     returnObject = new JSONArray(response);
+
+
+
+                    *//*
+*/
+/*JSONArray jsonarray = new JSONArray(returnObject);
+
+                    for (int i = 0; i < jsonarray.length(); i++) {
+
+                        JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+                        String listID = jsonobject.getString("id");
+                        String userID = jsonobject.getString("UserId");
+                        String listName = jsonobject.getString("ListName");
+
+                    }*//*
+*/
+/*
 
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
                 }
+
+                *//*
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -71,6 +105,7 @@ public class ListRequest {
 
     }
 
+*/
 
 
 }
