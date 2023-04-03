@@ -53,7 +53,9 @@ import android.widget.TextView;
             convertView= inflator.inflate(R.layout.activity_list_page, null);
 
             TextView txtView = (TextView) convertView.findViewById(R.id.Listtext);
+
             txtView.setText(ListUser[i]);
+
             return convertView;
 
 

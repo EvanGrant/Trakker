@@ -1,6 +1,7 @@
 package com.example.trakker;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.BaseAdapter;
@@ -21,9 +22,14 @@ public class ListPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_page);
         listView= (ListView) findViewById(R.id.Listpage);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, UserList);
+        listView.setAdapter(arrayAdapter);
+        /*
         MvListAdapter listAdapter = new MvListAdapter(getApplicationContext(),UserList);
 
        listView.setAdapter(listAdapter);
+       */
+
 
     }
 }
