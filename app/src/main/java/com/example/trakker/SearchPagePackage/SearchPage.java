@@ -125,7 +125,7 @@ public class SearchPage extends AppCompatActivity {
 
                 Log.e("Query Text", "Query" + query);
 
-                String convertedQueryForAPISearch = query.toString();
+                //String convertedQueryForAPISearch = query.toString();
 
                 getData(query);
 
@@ -175,6 +175,11 @@ public class SearchPage extends AppCompatActivity {
     private void getData(String query) {
 
         courseModelArrayList.clear();
+
+        movieTitleArray.clear();
+        movieBackDropArray.clear();
+        moviePosterArray.clear();
+        movieIDArray.clear();
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
