@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,9 +32,19 @@ public class LogIn extends AppCompatActivity {
     Button signinbutton;
     Button createacctbutton;
 
-    private JSONArray returnObject;
+    private JSONObject returnObject;
     public String listName;
     public ArrayList<JSONObject> ListObject;
+    public String email;
+    public String password;
+
+    public String FirstName;
+    public String LastName;
+    public int userID;
+    public
+
+    EditText editTextEmail;
+    EditText editTextPassword;
 
 /*
     ImageView testImageView;
@@ -51,25 +62,33 @@ public class LogIn extends AppCompatActivity {
 
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
+        editTextEmail = findViewById(R.id.usernamelogin);
+        editTextPassword = findViewById(R.id.passwordlogin);
+
+
+
         /*
         getData();
         testImageView = findViewById(R.id.testImageView);
         Picasso.get().load(url).into(testImageView);
         */
 
-        GetAllLists(1);
-
         signinbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainPage.class);
-                view.getContext().startActivity(intent);}
+                
+                email = editTextEmail.getText().toString();
+                password = editTextPassword.getText().toString();
+
+                GetUserInfo(email, password, view); //use the variables FirstName, LastName, and userID
+
+            }
         });
 
         createacctbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ShowListContentsPage.class);
+                Intent intent = new Intent(view.getContext(), Registration.class);
                 view.getContext().startActivity(intent);}
         });
 
@@ -78,7 +97,7 @@ public class LogIn extends AppCompatActivity {
 
 
 
-    public void GetAllLists(int userID){
+    public void GetUserInfo(String username, String password, View view){
 
         RequestQueue mRequestQueue;
         StringRequest mStringRequest;
@@ -86,7 +105,7 @@ public class LogIn extends AppCompatActivity {
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
-        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
+        String RESTUrl = "http://10.0.2.2:4000/users/" + username + "/" + password;
 
         // String Request initialized
         mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
@@ -96,17 +115,26 @@ public class LogIn extends AppCompatActivity {
             {
                 try {
 
-                    for (int i = 0; i < response.length(); i++) {
+                    returnObject = new JSONObject(response);
 
-                        returnObject = new JSONArray(response);
+                    userID = Integer.parseInt(returnObject.getString("id") );
+                    LastName = returnObject.getString("LastName");
+                    FirstName = returnObject.getString("FirstName");
 
-                        JSONObject jsonobject = returnObject.getJSONObject(i);
+                    if(userID > 0){
 
-                        String listID = jsonobject.getString("id");
-                        String userID = jsonobject.getString("UserId");
-                        String listName = jsonobject.getString("ListName");
+                        Intent intent = new Intent(view.getContext(), MainPage.class);
+                        view.getContext().startActivity(intent);
+
+                        intent.putExtra("userID", userID);
+
+
+                    }else{
+
+                        Toast.makeText(LogIn.this, "Incorrect Login", Toast.LENGTH_SHORT).show();
 
                     }
+
 
                 }
                 catch (Exception e)
