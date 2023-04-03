@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.MainPagePackage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.trakker.MovieTVShowDisplayPage;
+import com.example.trakker.R;
 
 import java.util.ArrayList;
 

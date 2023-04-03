@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.APIRequests;
 
 public class UserRequests {
 
