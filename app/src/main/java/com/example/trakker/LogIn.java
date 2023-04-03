@@ -28,8 +28,6 @@ import java.util.ArrayList;
 
 public class LogIn extends AppCompatActivity {
 
-
-
     Button signinbutton;
     Button createacctbutton;
 
