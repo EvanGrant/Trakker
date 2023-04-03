@@ -9,8 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-
+/*
     public class MvListAdapter extends BaseAdapter {
+        /*
 
         Context context;
 
@@ -62,3 +63,4 @@ import android.widget.TextView;
 
 
     }
+*/

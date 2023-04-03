@@ -13,11 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listtitle"
-
-        android:divider= "@color/black"
-        android:dividerheight= "2dp"
         android:text="Lists"
-        android:listselector= "@color/purple"
         android:textColor="@color/black"
         android:textSize="38dp"
         android:textStyle="bold"

@@ -24,6 +24,9 @@ public class ListPage extends AppCompatActivity {
         listView= (ListView) findViewById(R.id.Listpage);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, UserList);
         listView.setAdapter(arrayAdapter);
+
+
+
         /*
         MvListAdapter listAdapter = new MvListAdapter(getApplicationContext(),UserList);
 
