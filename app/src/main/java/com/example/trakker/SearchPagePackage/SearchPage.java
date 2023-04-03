@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.trakker.MainPage;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.R;
 import com.example.trakker.UserAccountPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -123,6 +123,10 @@ public class SearchPage extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
+                Log.e("Query Text", "Query" + query);
+
+                //String convertedQueryForAPISearch = query.toString();
+
                 getData(query);
 
                 return false;
@@ -139,29 +143,7 @@ public class SearchPage extends AppCompatActivity {
         return true;
     }
 
-    /*private void filter(String text) {
-        // creating a new array list to filter our data.
-        ArrayList<CourseModel> filteredlist = new ArrayList<CourseModel>();
 
-        // running a for loop to compare elements.
-        for (CourseModel item : courseModelArrayList) {
-            // checking if the entered string matched with any item of our recycler view.
-            if (item.getCourseName().toLowerCase().contains(text.toLowerCase())) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredlist.add(item);
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
-            //Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
-        } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            adapter.filterList(filteredlist);
-        }
-    }*/
 
     private void buildRecyclerView() {
 
@@ -171,10 +153,6 @@ public class SearchPage extends AppCompatActivity {
         // below line is to add data to our array list.
         /*
         courseModelArrayList.add(new CourseModel("DSA", "DSA Self Paced Course"));
-        courseModelArrayList.add(new CourseModel("JAVA", "JAVA Self Paced Course"));
-        courseModelArrayList.add(new CourseModel("C++", "C++ Self Paced Course"));
-        courseModelArrayList.add(new CourseModel("Python", "Python Self Paced Course"));
-        courseModelArrayList.add(new CourseModel("Fork CPP", "Fork CPP Self Paced Course"));
         */
         //getData();
 
@@ -196,12 +174,18 @@ public class SearchPage extends AppCompatActivity {
 
     private void getData(String query) {
 
+        courseModelArrayList.clear();
+
+        movieTitleArray.clear();
+        movieBackDropArray.clear();
+        moviePosterArray.clear();
+        movieIDArray.clear();
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
         // String Request initialized
-        mStringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/multi?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&query=" + query + "=1&include_adult=false", new Response.Listener<String>()
+        mStringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/multi?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&query=" + query + "&include_adult=false", new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)
@@ -233,7 +217,6 @@ public class SearchPage extends AppCompatActivity {
                                 String moviePoster = movie.getString("poster_path");
                                 String backDropPoster = movie.getString("backdrop_path");
 
-
                                 movieIDArray.add(movieID);
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
@@ -259,11 +242,6 @@ public class SearchPage extends AppCompatActivity {
                             {
                                 continue;
                             }
-
-
-
-
-
                         }
                     }
 
@@ -288,5 +266,32 @@ public class SearchPage extends AppCompatActivity {
 
         mRequestQueue.add(mStringRequest);
     }
+
+
+
+
+    /*private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<CourseModel> filteredlist = new ArrayList<CourseModel>();
+
+        // running a for loop to compare elements.
+        for (CourseModel item : courseModelArrayList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getCourseName().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            //Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist);
+        }
+    }*/
 
 }

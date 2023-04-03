@@ -1,4 +1,4 @@
-package com.example.trakker;
+package com.example.trakker.MainPagePackage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.ListPage;
+import com.example.trakker.R;
 import com.example.trakker.SearchPagePackage.SearchPage;
+import com.example.trakker.UserAccountPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -85,7 +88,7 @@ public class MainPage extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.UserAccount:
-                        startActivity(new Intent(getApplicationContext(),UserAccountPage.class));
+                        startActivity(new Intent(getApplicationContext(), UserAccountPage.class));
                         overridePendingTransition(0,0);
                         return true;
 

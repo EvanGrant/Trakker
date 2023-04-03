@@ -19,9 +19,6 @@ import android.widget.TextView;
         LayoutInflater inflator;
 
 
-
-
-
         public MvListAdapter(Context ctx, String [] UserList) {
 
             this.context = ctx;
@@ -50,15 +47,11 @@ import android.widget.TextView;
         @Override
         public View getView ( int i, View convertView, ViewGroup viewGroup){
 
-            convertView= inflator.inflate(R.layout.activity_list_page, null);
+            convertView = inflator.inflate(R.layout.activity_list_page, null);
 
             TextView txtView = (TextView) convertView.findViewById(R.id.Listtext);
             txtView.setText(ListUser[i]);
             return convertView;
-
-
-
-
 
 
         }

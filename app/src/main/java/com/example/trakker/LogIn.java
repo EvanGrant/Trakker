@@ -2,14 +2,13 @@ package com.example.trakker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.trakker.ListRequest;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,15 +16,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.APIRequests.ListRequest;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.ShowListContentsPackage.ShowListContentsPage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class LogIn extends AppCompatActivity {
 
     Button signinbutton;
     Button createacctbutton;
+
+    private JSONArray returnObject;
+    public String listName;
+    public ArrayList<JSONObject> ListObject;
 
 /*
     ImageView testImageView;
@@ -49,7 +57,7 @@ public class LogIn extends AppCompatActivity {
         Picasso.get().load(url).into(testImageView);
         */
 
-        SQLRequest();
+        GetAllLists(1);
 
         signinbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,27 +76,61 @@ public class LogIn extends AppCompatActivity {
     }
 
 
-    void SQLRequest()
-    {
-
-        JSONArray jsonArray = new JSONArray();
 
 
+    public void GetAllLists(int userID){
 
-        ListRequest Request = new ListRequest();
-        jsonArray = Request.GetAllLists(1, this);
+        RequestQueue mRequestQueue;
+        StringRequest mStringRequest;
 
-        Toast.makeText(this, "SQLRequest: " + jsonArray, Toast.LENGTH_SHORT).show();
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+
+                        returnObject = new JSONArray(response);
+
+                        JSONObject jsonobject = returnObject.getJSONObject(i);
+
+                        String listID = jsonobject.getString("id");
+                        String userID = jsonobject.getString("UserId");
+                        String listName = jsonobject.getString("ListName");
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
 
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
 
-
-
-
+        mRequestQueue.add(mStringRequest);
 
 
     }
+
+
 
 
 /*

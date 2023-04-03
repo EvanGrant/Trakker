@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.trakker.MainPagePackage.MainPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class UserAccountPage extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class UserAccountPage extends AppCompatActivity {
                 switch(item.getItemId())
                 {
                     case R.id.MainPage:
-                        startActivity(new Intent(getApplicationContext(),MainPage.class));
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
                         overridePendingTransition(0,0);
                         return true;
 
