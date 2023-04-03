@@ -37,6 +37,8 @@ public class Registration extends AppCompatActivity {
     public String email;
     public String password;
 
+    //this is a comment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
