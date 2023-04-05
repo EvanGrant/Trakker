@@ -37,6 +37,7 @@ public class Registration extends AppCompatActivity {
     public String email;
     public String password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,17 +55,19 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String fName = EditTextFirstName.getText().toString();
-                String lName = EditTextLastName.getText().toString();
-                String email = EditTextEmail.getText().toString();
-                String password = EditTextPassword.getText().toString();
+                fName = EditTextFirstName.getText().toString();
+                lName = EditTextLastName.getText().toString();
+                email = EditTextEmail.getText().toString();
+                password = EditTextPassword.getText().toString();
+
+                RegisterUser();
 
             }
         });
 
     }
 
-    public void RegisterUser(String username, String password, View view){
+    public void RegisterUser(){
 
         RequestQueue queue = Volley.newRequestQueue(Registration.this);
         String url = "http://10.0.2.2:4000/users/";
@@ -73,14 +76,14 @@ public class Registration extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Registration.this, "Added Item to List!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registration.this, "Added User to List!", Toast.LENGTH_SHORT).show();
                         //go to the next page and add userId as a variable
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Registration.this, "item is already added to list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Registration.this, "user is already in database", Toast.LENGTH_SHORT).show();
             }
         }){
             protected Map<String, String> getParams(){
