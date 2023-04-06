@@ -85,15 +85,12 @@ public class Registration extends AppCompatActivity {
 
                             int userID = Integer.parseInt(returnObject.getString("id"));
 
-
-
                             if(userID > 0){
 
                                 Intent intent = new Intent(v.getContext(), MainPage.class);
                                 v.getContext().startActivity(intent);
                                 intent.putExtra("userID", userID);
                                 intent.putExtra("firstname", fName);
-
 
                             }else{
 

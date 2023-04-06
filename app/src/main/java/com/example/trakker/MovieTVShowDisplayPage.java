@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,23 +19,34 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.trakker.MainPagePackage.MainPage;
+import com.google.common.collect.Lists;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MovieTVShowDisplayPage extends AppCompatActivity {
 
     private TextView movieName, movieOverview;
     private ImageView moviePoster, movieBackdrop;
-
-    String movieID;
+    public Button addItemToListButton;
+    ArrayList<String> ListNameArray = new ArrayList<String>();
+    ArrayList<Integer> ListIDArray = new ArrayList<Integer>();
+    String passedMovieID;
+    int passedUserID;
     String posterURL;
     String backdropURL;
+    String movieID;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-
+    private JSONObject returnObject;
+    public ArrayList<JSONObject> ListObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +54,20 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         setContentView(R.layout.activity_movie_tvshow_display_page);
 
         Intent intent = getIntent();
-        String ID = intent.getStringExtra("id");
+        passedMovieID = intent.getStringExtra("id");
 
-        getData(ID);
+        GetData(passedMovieID);
+        GetAllLists(passedUserID);
 
+        addItemToListButton = findViewById(R.id.addItemButton);
         movieName = findViewById(R.id.movieNameTextView);
         moviePoster = findViewById(R.id.moviePosterImageView);
         movieOverview = findViewById(R.id.movieOverViewTextView);
         movieBackdrop = findViewById(R.id.movieBackdropImageView);
 
-
     }
 
-    private void getData(String id) {
+    private void GetData(String id) {
 
         String url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
@@ -112,6 +125,63 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         // object request to our request
         // queue to fetch all the json data.
         mRequestQueue.add(jsonObjectRequest);
+    }
+    public void GetAllLists(int userID){
+
+        RequestQueue mRequestQueue;
+        StringRequest mStringRequest;
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i <= jsonArray.length(); i++)
+                        {
+
+                            JSONObject list = jsonArray.getJSONObject(i);
+
+                            String listName = list.getString("ListName");
+                            int listID = list.getInt("id");
+
+                            ListNameArray.add(listName);
+                            ListIDArray.add(listID);
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
     }
 
 }

@@ -33,8 +33,12 @@ public class ListPage extends AppCompatActivity {
 
     public int userID;
 
-    //String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
     ArrayList<String> Lists = new ArrayList<String>();
+
+    //ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, R.layout.activity_list_layout);
+
+    //String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
+
 
     String[] UserList = {"Fav Mov"};
     ListView listView;
@@ -43,19 +47,30 @@ public class ListPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_page);
-        listView = (ListView) findViewById(R.id.Listpage);
 
-        //Lists.add("fav mov");
+        setContentView(R.layout.activity_list_page);
 
         GetLists(2);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, Lists);
 
+        listView = (ListView) findViewById(R.id.Listpage);
+
+        arrayAdapter.clear();
+
+        arrayAdapter.notifyDataSetChanged();
+
+        arrayAdapter.addAll(Lists);
+
+        arrayAdapter.notifyDataSetChanged();
+
         listView.setAdapter(arrayAdapter);
 
-    }
 
+
+        //Lists.add("fav mov");
+
+    }
 
     public void GetLists(int userID){
 
@@ -89,36 +104,15 @@ public class ListPage extends AppCompatActivity {
                             Lists.add(listName);
 
 
+
                         }
                     }
-
-
-
-                    /*
-                    //userID = Integer.parseInt(returnObject.getString("id") );
-
-
-                    if(userID > 0){
-
-                        Intent intent = new Intent(view.getContext(), MainPage.class);
-                        view.getContext().startActivity(intent);
-
-                        intent.putExtra("userID", userID);
-
-
-                    }else{
-
-                        Toast.makeText(ListPage.this, "Incorrect Login", Toast.LENGTH_SHORT).show();
-
-                    }
-                    */
-
-
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
                 }
+
 
 
 
