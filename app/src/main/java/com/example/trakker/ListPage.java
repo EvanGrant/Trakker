@@ -33,8 +33,7 @@ public class ListPage extends AppCompatActivity {
     public int userID;
 
     //String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
-    String UserList[] = {"Fav Mov"};
-
+    String[] UserList = {"Fav Mov"};
     ListView listView;
 
 
@@ -42,20 +41,13 @@ public class ListPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_page);
-        listView= (ListView) findViewById(R.id.Listpage);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, UserList);
-        listView.setAdapter(arrayAdapter);
-
+        listView = (ListView) findViewById(R.id.Listpage);
 
         GetLists(2);
 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, UserList);
 
-        /*
-        MvListAdapter listAdapter = new MvListAdapter(getApplicationContext(),UserList);
-
-       listView.setAdapter(listAdapter);
-       */
-
+        listView.setAdapter(arrayAdapter);
 
     }
 
@@ -78,12 +70,11 @@ public class ListPage extends AppCompatActivity {
             {
                 try {
 
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("");
+                    JSONArray jsonArray = new JSONArray(response);
 
                     if (jsonArray.length()>0)
                     {
-                        for (int i = 0; i < jsonArray.length(); i++)
+                        for (int i = 0; i <= jsonArray.length(); i++)
                         {
 
                             JSONObject list = jsonArray.getJSONObject(i);
@@ -95,6 +86,7 @@ public class ListPage extends AppCompatActivity {
 
                         }
                     }
+
 
 
                     /*

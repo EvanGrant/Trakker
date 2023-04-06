@@ -125,6 +125,7 @@ public class LogIn extends AppCompatActivity {
 
                         Intent intent = new Intent(view.getContext(), MainPage.class);
 
+                        intent.putExtra("firstname", FirstName);
                         intent.putExtra("userID", userID);
 
                         view.getContext().startActivity(intent);
