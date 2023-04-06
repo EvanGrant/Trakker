@@ -94,9 +94,6 @@ public class LogIn extends AppCompatActivity {
 
     }
 
-
-
-
     public void GetUserInfo(String username, String password, View view){
 
         RequestQueue mRequestQueue;
@@ -124,9 +121,13 @@ public class LogIn extends AppCompatActivity {
                     if(userID > 0){
 
                         Intent intent = new Intent(view.getContext(), MainPage.class);
+
+                        intent.putExtra("firstname", FirstName);
+                        intent.putExtra("userID", userID);
+
                         view.getContext().startActivity(intent);
 
-                        intent.putExtra("userID", userID);
+
 
 
                     }else{
@@ -157,33 +158,6 @@ public class LogIn extends AppCompatActivity {
 
 
     }
-
-
-
-
-/*
-
-    private void getData() {
-        // RequestQueue initialized
-        mRequestQueue = Volley.newRequestQueue(this);
-
-        // String Request initialized
-        mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
-            }
-        });
-
-        mRequestQueue.add(mStringRequest);
-    }
-*/
 
 
 }
