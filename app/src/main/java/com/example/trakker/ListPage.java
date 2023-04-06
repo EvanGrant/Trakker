@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class ListPage extends AppCompatActivity {
     public int userID;
 
     //String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
+    ArrayList<String> Lists = new ArrayList<String>();
+
     String[] UserList = {"Fav Mov"};
     ListView listView;
 
@@ -43,9 +46,11 @@ public class ListPage extends AppCompatActivity {
         setContentView(R.layout.activity_list_page);
         listView = (ListView) findViewById(R.id.Listpage);
 
+        //Lists.add("fav mov");
+
         GetLists(2);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, UserList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_layout, R.id.Listtext, Lists);
 
         listView.setAdapter(arrayAdapter);
 
@@ -81,7 +86,7 @@ public class ListPage extends AppCompatActivity {
 
                             String listName = list.getString("ListName");
 
-
+                            Lists.add(listName);
 
 
                         }
