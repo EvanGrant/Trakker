@@ -1,20 +1,41 @@
 package com.example.trakker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
+
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trakker.MainPagePackage.MainPage;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+
+
 public class ListPage extends AppCompatActivity {
 
+    public int userID;
 
-    String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
+    //String UserList[]= {"Favorite Movie", "Favorite Show", "Action Movie", "Comedy Movies"};
+    String UserList[] = {"Fav Mov"};
 
-        ListView listView;
+    ListView listView;
 
 
     @Override
@@ -26,6 +47,8 @@ public class ListPage extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
 
+        GetLists(2);
+
 
         /*
         MvListAdapter listAdapter = new MvListAdapter(getApplicationContext(),UserList);
@@ -35,5 +58,88 @@ public class ListPage extends AppCompatActivity {
 
 
     }
+
+
+    public void GetLists(int userID){
+
+        RequestQueue mRequestQueue;
+        StringRequest mStringRequest;
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("");
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject list = jsonArray.getJSONObject(i);
+
+                            String listName = list.getString("ListName");
+
+
+
+
+                        }
+                    }
+
+
+                    /*
+                    //userID = Integer.parseInt(returnObject.getString("id") );
+
+
+                    if(userID > 0){
+
+                        Intent intent = new Intent(view.getContext(), MainPage.class);
+                        view.getContext().startActivity(intent);
+
+                        intent.putExtra("userID", userID);
+
+
+                    }else{
+
+                        Toast.makeText(ListPage.this, "Incorrect Login", Toast.LENGTH_SHORT).show();
+
+                    }
+                    */
+
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
+    }
+
+
+
 }
 

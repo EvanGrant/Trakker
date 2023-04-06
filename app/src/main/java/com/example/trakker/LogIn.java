@@ -124,9 +124,12 @@ public class LogIn extends AppCompatActivity {
                     if(userID > 0){
 
                         Intent intent = new Intent(view.getContext(), MainPage.class);
-                        view.getContext().startActivity(intent);
 
                         intent.putExtra("userID", userID);
+
+                        view.getContext().startActivity(intent);
+
+
 
 
                     }else{

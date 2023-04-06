@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,11 +35,16 @@ public class MainPage extends AppCompatActivity {
 
     private static final String TAG = "MainPage";
 
+
+
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
     private Button ListsButton;
 
+    private int passedUserID;
+
+    private String passedFirstName;
 
     private String topRatedMoviesUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
     private ArrayList<String> topRatedMovieTitleArray = new ArrayList<>();
@@ -60,6 +67,16 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        TextView welcomeTextBox = findViewById(R.id.welcomeTextView);
+
+        Intent intent = getIntent();
+        passedUserID = intent.getIntExtra("userID", 0);
+        passedFirstName = intent.getStringExtra("firstname");
+
+        Toast.makeText(this, "User: " + passedUserID, Toast.LENGTH_SHORT).show();
+
+        welcomeTextBox.setText("Welcome " + passedFirstName);
 
         getDataTopRatedMovies();
         getDataPopularMovies();
@@ -325,6 +342,10 @@ public class MainPage extends AppCompatActivity {
         MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray, newReleasesMoviesIDArray);
         recyclerView3.setAdapter(adapter3);
     }
+
+
+
+
 }
 
 

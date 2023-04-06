@@ -60,14 +60,14 @@ public class Registration extends AppCompatActivity {
                 email = EditTextEmail.getText().toString();
                 password = EditTextPassword.getText().toString();
 
-                RegisterUser();
+                RegisterUser(view);
 
             }
         });
 
     }
 
-    public void RegisterUser(){
+    public void RegisterUser(View v){
 
         RequestQueue queue = Volley.newRequestQueue(Registration.this);
         String url = "http://10.0.2.2:4000/users/";
@@ -77,6 +77,37 @@ public class Registration extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(Registration.this, "Added User to List!", Toast.LENGTH_SHORT).show();
+
+
+                        try {
+
+                            JSONObject returnObject = new JSONObject(response);
+
+                            int userID = Integer.parseInt(returnObject.getString("id"));
+
+
+
+                            if(userID > 0){
+
+                                Intent intent = new Intent(v.getContext(), MainPage.class);
+                                v.getContext().startActivity(intent);
+                                intent.putExtra("userID", userID);
+                                intent.putExtra("firstname", fName);
+
+
+                            }else{
+
+                                Toast.makeText(Registration.this, "Incorrect Login", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
                         //go to the next page and add userId as a variable
 
                     }
