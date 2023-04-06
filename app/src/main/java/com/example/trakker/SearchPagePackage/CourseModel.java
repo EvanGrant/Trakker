@@ -9,7 +9,6 @@ public class CourseModel {
     private String courseDescription;
     private String Poster;
     private String Backdrop;
-
     private String courseID;
 
     // creating constructor for our variables.
