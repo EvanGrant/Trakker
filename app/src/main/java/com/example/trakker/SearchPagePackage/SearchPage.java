@@ -53,8 +53,6 @@ public class SearchPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
 
-        //getData();
-
         // initializing our variables.
         courseRV = findViewById(R.id.idRVCourses);
 
@@ -191,9 +189,10 @@ public class SearchPage extends AppCompatActivity {
             public void onResponse(String response)
             {
 
-                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
 
                 Log.e("Res: ", response);
+
                 try
                 {
 
@@ -255,6 +254,7 @@ public class SearchPage extends AppCompatActivity {
                 }
 
 
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -263,6 +263,7 @@ public class SearchPage extends AppCompatActivity {
                 Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
             }
         });
+
 
         mRequestQueue.add(mStringRequest);
     }
