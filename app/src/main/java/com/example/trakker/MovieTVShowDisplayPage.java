@@ -55,6 +55,9 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
         Intent intent = getIntent();
         passedMovieID = intent.getStringExtra("id");
+        passedUserID = intent.getIntExtra("passedUserID", 0);
+
+        Toast.makeText(this, "User ID: " + passedUserID, Toast.LENGTH_SHORT).show();
 
         GetData(passedMovieID);
         GetAllLists(passedUserID);

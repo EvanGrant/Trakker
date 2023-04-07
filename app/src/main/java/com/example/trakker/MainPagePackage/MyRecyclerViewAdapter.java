@@ -27,12 +27,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mIDs = new ArrayList<>();
     private Context mContext;
+    private int passedUserID;
 
-    public MyRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> ids) {
+    public MyRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> ids, int userID) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
         mIDs = ids;
+        passedUserID = userID;
 
     }
 
@@ -91,6 +93,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
         intent.putExtra("id", id);
+        intent.putExtra("passedUserID", passedUserID);
         context.startActivity(intent);
 
     }
