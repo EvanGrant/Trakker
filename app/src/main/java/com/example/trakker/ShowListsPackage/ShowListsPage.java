@@ -30,6 +30,8 @@ public class ShowListsPage extends AppCompatActivity {
 
     List<ListItems> listNames = new ArrayList<ListItems>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,7 @@ public class ShowListsPage extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ShowListsAdapter(getApplicationContext(),listNames));
+
 
     }
 
@@ -80,6 +83,7 @@ public class ShowListsPage extends AppCompatActivity {
                             int listID = list.getInt("id");
                             String listName = list.getString("ListName");
 
+                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
                             listNames.add(new ListItems(listName, listID));
 
                         }
@@ -106,5 +110,8 @@ public class ShowListsPage extends AppCompatActivity {
 
 
     }
+
+
+
 
 }
