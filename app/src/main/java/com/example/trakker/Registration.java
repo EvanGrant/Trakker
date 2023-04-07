@@ -37,11 +37,13 @@ public class Registration extends AppCompatActivity {
     public String email;
     public String password;
 
+    GlobalClass globalClass = new GlobalClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
 
 
         EditTextFirstName = findViewById(R.id.FirstNameRegistration);
@@ -85,9 +87,19 @@ public class Registration extends AppCompatActivity {
 
                             int userID = Integer.parseInt(returnObject.getString("id"));
 
+
                             if(userID > 0){
 
+                                String eMail = returnObject.getString("Email");
+                                String firstname = returnObject.getString("FirstName");
+                                String lastname = returnObject.getString("LastName");
+
                                 Intent intent = new Intent(v.getContext(), MainPage.class);
+
+                                globalClass.setUserID(userID);
+                                globalClass.setUserEmail(eMail);
+                                globalClass.setUserFirstName(firstname);
+                                globalClass.setUserLastName(lastname);
 
                                 intent.putExtra("userID", userID);
                                 intent.putExtra("firstname", fName);
