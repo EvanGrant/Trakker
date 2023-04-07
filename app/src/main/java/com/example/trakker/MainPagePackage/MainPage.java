@@ -22,9 +22,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.GlobalClass;
 import com.example.trakker.ListPage;
 import com.example.trakker.R;
 import com.example.trakker.SearchPagePackage.SearchPage;
+import com.example.trakker.ShowListsPackage.ShowListsPage;
 import com.example.trakker.UserAccountPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,7 +37,7 @@ public class MainPage extends AppCompatActivity {
 
     private static final String TAG = "MainPage";
 
-
+    GlobalClass g = new GlobalClass();
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
@@ -74,6 +76,8 @@ public class MainPage extends AppCompatActivity {
         passedUserID = intent.getIntExtra("userID", 0);
         passedFirstName = intent.getStringExtra("firstname");
 
+        passedUserID = g.getUserID();
+
         Toast.makeText(this, "User: " + passedUserID, Toast.LENGTH_SHORT).show();
 
         welcomeTextBox.setText("Welcome " + passedFirstName);
@@ -93,8 +97,9 @@ public class MainPage extends AppCompatActivity {
         ListsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ListPage.class);
-                view.getContext().startActivity(intent);}
+                Intent intent = new Intent(view.getContext(), ShowListsPage.class);
+                view.getContext().startActivity(intent);
+            }
         });
 
         // Perform item selected listener for bottom navigation

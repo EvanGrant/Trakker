@@ -14,7 +14,6 @@ import com.example.trakker.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-
     Context context;
     List<Item> items;
 
