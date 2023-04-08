@@ -39,6 +39,9 @@ public class ShowListsPage extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
+    RecyclerView recyclerView;
+    ShowListsAdapter adapter;
+
     GlobalClass g = new GlobalClass();
 
     List<ListItems> listNames = new ArrayList<ListItems>();
@@ -58,6 +61,11 @@ public class ShowListsPage extends AppCompatActivity {
         //listNames.add(new ListItems("1st list", 2));
         //listNames.add(new ListItems("other list", 3));
         //listNames.add(new ListItems("another list", 4));
+
+        recyclerView = findViewById(R.id.rvShowLists);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ShowListsAdapter(getApplicationContext(), listNames);
+        recyclerView.setAdapter(adapter);
 
         GetListNames(g.getUserID());
 
@@ -200,20 +208,16 @@ public class ShowListsPage extends AppCompatActivity {
 
         mRequestQueue.add(mStringRequest);
 
-        initRecyclerView();
+        //initRecyclerView();
 
     }
 
 
     private void initRecyclerView(){
 
-        RecyclerView recyclerView;
-        ShowListsAdapter adapter;
 
-        recyclerView = findViewById(R.id.rvShowLists);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ShowListsAdapter(getApplicationContext(), listNames);
-        recyclerView.setAdapter(adapter);
+
+
 
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //RecyclerView recyclerView = findViewById(R.id.rvAnimals);
