@@ -15,10 +15,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.LogTime;
 import com.example.trakker.GlobalClass;
+import com.example.trakker.MainPagePackage.MyRecyclerViewAdapter;
 import com.example.trakker.R;
 import com.example.trakker.ShowListContentsPackage.Item;
 import com.example.trakker.ShowListContentsPackage.MyAdapter;
@@ -34,8 +36,8 @@ import javax.security.auth.callback.Callback;
 
 public class ShowListsPage extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    ShowListsAdapter adapter;
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
 
     GlobalClass g = new GlobalClass();
 
@@ -50,20 +52,14 @@ public class ShowListsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_lists_page);
 
-        new LongRunningTask().execute();
+        //new LongRunningTask().execute();
 
         //To Test if RecyclerView Works
-        listNames.add(new ListItems("1st list", 2));
+        //listNames.add(new ListItems("1st list", 2));
+        //listNames.add(new ListItems("other list", 3));
+        //listNames.add(new ListItems("another list", 4));
 
-        adapter = new ShowListsAdapter(getApplicationContext(), listNames);
-        recyclerView = findViewById(R.id.rvShowLists);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-
-
-
-        //int userID = (g.getUserID());
-        //GetListNames(userID);
+        GetListNames(g.getUserID());
 
     }
 
@@ -124,6 +120,9 @@ public class ShowListsPage extends AppCompatActivity {
                     {
                         e.printStackTrace();
                     }
+
+
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -142,9 +141,7 @@ public class ShowListsPage extends AppCompatActivity {
         protected void onPostExecute(List<ListItems> list) {
             super.onPostExecute(list);
 
-
-
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
 
             Log.d(TAG, "onPostExecute: UI UPDATE");
 
@@ -154,15 +151,11 @@ public class ShowListsPage extends AppCompatActivity {
 
     public void GetListNames(int userID){
 
-        RequestQueue mRequestQueue;
-        StringRequest mStringRequest;
-
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
 
+
         String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
-
-
 
         // String Request initialized
         mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
@@ -170,12 +163,10 @@ public class ShowListsPage extends AppCompatActivity {
             @Override
             public void onResponse(String response)
             {
-
-
-
                 try {
 
                     JSONArray jsonArray = new JSONArray(response);
+
 
                     if (jsonArray.length()>0)
                     {
@@ -193,14 +184,11 @@ public class ShowListsPage extends AppCompatActivity {
                         }
                     }
                 }
+
                 catch (Exception e)
                 {
                     e.printStackTrace();
                 }
-
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -212,10 +200,29 @@ public class ShowListsPage extends AppCompatActivity {
 
         mRequestQueue.add(mStringRequest);
 
+        initRecyclerView();
 
     }
 
 
+    private void initRecyclerView(){
+
+        RecyclerView recyclerView;
+        ShowListsAdapter adapter;
+
+        recyclerView = findViewById(R.id.rvShowLists);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ShowListsAdapter(getApplicationContext(), listNames);
+        recyclerView.setAdapter(adapter);
+
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        //recyclerView.setLayoutManager(layoutManager);
+        //MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray, passedUserID);
+        //recyclerView.setAdapter(adapter);
+
+
+    }
 
 
 }
