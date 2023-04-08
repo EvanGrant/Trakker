@@ -49,6 +49,8 @@ public class ShowListsPage extends AppCompatActivity {
     private static final String TAG = "ShowListsPage";
 
     Context context = this;
+
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class ShowListsPage extends AppCompatActivity {
         //listNames.add(new ListItems("1st list", 2));
         //listNames.add(new ListItems("other list", 3));
         //listNames.add(new ListItems("another list", 4));
+
 
         recyclerView = findViewById(R.id.rvShowLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,7 +86,6 @@ public class ShowListsPage extends AppCompatActivity {
 
         @Override
         protected List<ListItems> doInBackground(Void... voids) {
-
 
 
             //MYSQL CALL HERE
@@ -149,7 +151,9 @@ public class ShowListsPage extends AppCompatActivity {
         protected void onPostExecute(List<ListItems> list) {
             super.onPostExecute(list);
 
-            //adapter.notifyDataSetChanged();
+
+
+            adapter.notifyDataSetChanged();
 
             Log.d(TAG, "onPostExecute: UI UPDATE");
 
@@ -218,7 +222,6 @@ public class ShowListsPage extends AppCompatActivity {
 
 
 
-
         //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //RecyclerView recyclerView = findViewById(R.id.rvAnimals);
         //recyclerView.setLayoutManager(layoutManager);
@@ -227,6 +230,7 @@ public class ShowListsPage extends AppCompatActivity {
 
 
     }
+
 
 
 }
