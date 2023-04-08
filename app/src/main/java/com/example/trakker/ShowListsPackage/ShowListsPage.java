@@ -29,20 +29,25 @@ import com.example.trakker.ShowListContentsPackage.MyAdapter;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 
 public class ShowListsPage extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
+
+    static boolean resultWeb = false;
 
     RecyclerView recyclerView;
     ShowListsAdapter adapter;
@@ -67,34 +72,12 @@ public class ShowListsPage extends AppCompatActivity {
         //listNames.add(new ListItems("other list", 3));
         //listNames.add(new ListItems("another list", 4));
 
-        OkHttpClient client = new OkHttpClient();
-        String url = "http://10.0.2.2:4000/lists/" + "2";
+        try {
+            run();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String myResponse = response.body().string();
-
-                    ShowListsPage.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-            }
-        });
 
         recyclerView = findViewById(R.id.rvShowLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -190,6 +173,65 @@ public class ShowListsPage extends AppCompatActivity {
             Log.d(TAG, "onPostExecute: UI UPDATE");
 
         }
+    }
+
+    public void run() throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://10.0.2.2:4000/lists/" + "2")
+                .build();
+
+        Callback callback = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
+                String myResponse = response.body().string();
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(myResponse);
+
+
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject list = jsonArray.getJSONObject(i);
+
+                            int listID = list.getInt("id");
+                            String listName = list.getString("ListName");
+
+                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
+                            listNames.add(new ListItems(listName, listID));
+
+                        }
+
+
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                ShowListsPage.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        };
+
+        client.newCall(request).enqueue(callback);
+
     }
 
 
