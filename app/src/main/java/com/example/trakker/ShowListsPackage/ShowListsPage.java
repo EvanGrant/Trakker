@@ -17,6 +17,7 @@ import com.example.trakker.GlobalClass;
 import com.example.trakker.R;
 import com.example.trakker.ShowListContentsPackage.Item;
 import com.example.trakker.ShowListContentsPackage.MyAdapter;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,12 +64,17 @@ public class ShowListsPage extends AppCompatActivity {
 
         String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
 
+
+
         // String Request initialized
         mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)
             {
+
+
+
                 try {
 
                     JSONArray jsonArray = new JSONArray(response);
@@ -112,6 +118,8 @@ public class ShowListsPage extends AppCompatActivity {
     }
 
 
-
+    interface OnTasksRetrieved {
+        void getResult(List<Task> result);
+    }
 
 }
