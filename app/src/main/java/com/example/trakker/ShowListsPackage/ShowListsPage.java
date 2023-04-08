@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
 
 import com.android.volley.Request;
@@ -29,10 +30,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.callback.Callback;
+
 public class ShowListsPage extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    //ShowListsAdapter adapter;
+    ShowListsAdapter adapter;
 
     GlobalClass g = new GlobalClass();
 
@@ -47,40 +50,37 @@ public class ShowListsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_lists_page);
 
-
-
         new LongRunningTask().execute();
 
         //To Test if RecyclerView Works
-        //listNames.add(new ListItems("1st list", 2));
+        listNames.add(new ListItems("1st list", 2));
 
-        //adapter = new ShowListsAdapter(getApplicationContext(), listNames);
+        adapter = new ShowListsAdapter(getApplicationContext(), listNames);
         recyclerView = findViewById(R.id.rvShowLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ShowListsAdapter(getApplicationContext(),listNames));
+        recyclerView.setAdapter(adapter);
+
 
 
         //int userID = (g.getUserID());
         //GetListNames(userID);
 
-
-
     }
 
-    private class LongRunningTask extends AsyncTask<Void, Void, Void> {
 
-        /*
-
-        private Context mContext;
-
-        public LongRunningTask(Context context){
-            mContext = context;
-        }
-
-        */
+    private class LongRunningTask extends AsyncTask<Void, Void, List<ListItems>> {
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected List<ListItems> doInBackground(Void... voids) {
+
+
 
             //MYSQL CALL HERE
             Log.d(TAG, "doInBackground: MySQL Call");
@@ -99,8 +99,6 @@ public class ShowListsPage extends AppCompatActivity {
                 @Override
                 public void onResponse(String response)
                 {
-
-
 
                     try {
 
@@ -126,10 +124,6 @@ public class ShowListsPage extends AppCompatActivity {
                     {
                         e.printStackTrace();
                     }
-
-
-
-
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -145,10 +139,12 @@ public class ShowListsPage extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Void unused) {
-            super.onPostExecute(unused);
+        protected void onPostExecute(List<ListItems> list) {
+            super.onPostExecute(list);
 
-            //ShowListsAdapter.notifyDataSetChanged();
+
+
+            adapter.notifyDataSetChanged();
 
             Log.d(TAG, "onPostExecute: UI UPDATE");
 
