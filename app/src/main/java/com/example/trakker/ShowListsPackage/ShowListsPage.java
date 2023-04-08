@@ -1,5 +1,6 @@
 package com.example.trakker.ShowListsPackage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,10 +31,13 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
 
 public class ShowListsPage extends AppCompatActivity {
 
@@ -57,20 +62,47 @@ public class ShowListsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_lists_page);
 
-        //new LongRunningTask().execute();
-
         //To Test if RecyclerView Works
         //listNames.add(new ListItems("1st list", 2));
         //listNames.add(new ListItems("other list", 3));
         //listNames.add(new ListItems("another list", 4));
 
+        OkHttpClient client = new OkHttpClient();
+        String url = "http://10.0.2.2:4000/lists/" + "2";
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String myResponse = response.body().string();
+
+                    ShowListsPage.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
 
         recyclerView = findViewById(R.id.rvShowLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ShowListsAdapter(getApplicationContext(), listNames);
         recyclerView.setAdapter(adapter);
 
-        GetListNames(g.getUserID());
+        //new LongRunningTask().execute();
+        //GetListNames(g.getUserID());
 
     }
 
@@ -211,6 +243,7 @@ public class ShowListsPage extends AppCompatActivity {
         });
 
         mRequestQueue.add(mStringRequest);
+
 
         //initRecyclerView();
 
