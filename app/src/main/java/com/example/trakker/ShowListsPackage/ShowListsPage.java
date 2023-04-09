@@ -47,8 +47,6 @@ public class ShowListsPage extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
-    static boolean resultWeb = false;
-
     RecyclerView recyclerView;
     ShowListsAdapter adapter;
 
@@ -73,7 +71,9 @@ public class ShowListsPage extends AppCompatActivity {
         //listNames.add(new ListItems("another list", 4));
 
         try {
+
             run();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -84,11 +84,138 @@ public class ShowListsPage extends AppCompatActivity {
         adapter = new ShowListsAdapter(getApplicationContext(), listNames);
         recyclerView.setAdapter(adapter);
 
-        //new LongRunningTask().execute();
-        //GetListNames(g.getUserID());
 
     }
 
+
+    public void run() throws Exception{
+
+        OkHttpClient client = new OkHttpClient();
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://10.0.2.2:4000/lists/" + "2")
+                .build();
+
+        Callback callback = new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
+                String myResponse = response.body().string();
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(myResponse);
+
+
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+
+                            JSONObject list = jsonArray.getJSONObject(i);
+
+                            int listID = list.getInt("id");
+                            String listName = list.getString("ListName");
+
+                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
+                            listNames.add(new ListItems(listName, listID));
+
+                        }
+
+
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                ShowListsPage.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        };
+
+        client.newCall(request).enqueue(callback);
+
+    }
+
+    public void GetListNames(int userID){
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+
+        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
+
+        // String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+
+
+                    if (jsonArray.length()>0)
+                    {
+                        for (int i = 0; i <= jsonArray.length(); i++)
+                        {
+
+                            JSONObject list = jsonArray.getJSONObject(i);
+
+                            int listID = list.getInt("id");
+                            String listName = list.getString("ListName");
+
+                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
+                            listNames.add(new ListItems(listName, listID));
+
+                        }
+                    }
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
+        //initRecyclerView();
+
+    }
+
+    private void initRecyclerView(){
+
+
+
+
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        //RecyclerView recyclerView = findViewById(R.id.rvAnimals);
+        //recyclerView.setLayoutManager(layoutManager);
+        //MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray, passedUserID);
+        //recyclerView.setAdapter(adapter);
+
+
+    }
 
     private class LongRunningTask extends AsyncTask<Void, Void, List<ListItems>> {
 
@@ -174,138 +301,5 @@ public class ShowListsPage extends AppCompatActivity {
 
         }
     }
-
-    public void run() throws Exception{
-
-        OkHttpClient client = new OkHttpClient();
-
-        okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://10.0.2.2:4000/lists/" + "2")
-                .build();
-
-        Callback callback = new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull okhttp3.Response response) throws IOException {
-                String myResponse = response.body().string();
-
-                try {
-
-                    JSONArray jsonArray = new JSONArray(myResponse);
-
-
-                        for (int i = 0; i < jsonArray.length(); i++)
-                        {
-
-                            JSONObject list = jsonArray.getJSONObject(i);
-
-                            int listID = list.getInt("id");
-                            String listName = list.getString("ListName");
-
-                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
-                            listNames.add(new ListItems(listName, listID));
-
-                        }
-
-
-
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-
-                ShowListsPage.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        adapter.notifyDataSetChanged();
-                        Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        };
-
-        client.newCall(request).enqueue(callback);
-
-    }
-
-
-    public void GetListNames(int userID){
-
-        // RequestQueue initialized
-        mRequestQueue = Volley.newRequestQueue(this);
-
-
-        String RESTUrl = "http://10.0.2.2:4000/lists/" + userID;
-
-        // String Request initialized
-        mStringRequest = new StringRequest(Request.Method.GET, RESTUrl, new Response.Listener<String>()
-        {
-            @Override
-            public void onResponse(String response)
-            {
-                try {
-
-                    JSONArray jsonArray = new JSONArray(response);
-
-
-                    if (jsonArray.length()>0)
-                    {
-                        for (int i = 0; i <= jsonArray.length(); i++)
-                        {
-
-                            JSONObject list = jsonArray.getJSONObject(i);
-
-                            int listID = list.getInt("id");
-                            String listName = list.getString("ListName");
-
-                            //Info is getting in correctly, but because its async its not being filled into the recyclerview correctly
-                            listNames.add(new ListItems(listName, listID));
-
-                        }
-                    }
-                }
-
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                Log.d("Volley Response", "Error : Volley Request did not work" + error.toString());
-            }
-        });
-
-        mRequestQueue.add(mStringRequest);
-
-
-        //initRecyclerView();
-
-    }
-
-
-    private void initRecyclerView(){
-
-
-
-
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        //RecyclerView recyclerView = findViewById(R.id.rvAnimals);
-        //recyclerView.setLayoutManager(layoutManager);
-        //MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray, passedUserID);
-        //recyclerView.setAdapter(adapter);
-
-
-    }
-
-
 
 }

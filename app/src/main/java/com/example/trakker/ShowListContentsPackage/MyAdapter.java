@@ -1,7 +1,9 @@
 package com.example.trakker.ShowListContentsPackage;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     Context context;
     List<Item> items;
+
+    private static final String TAG = "MyAdapter";
 
     public MyAdapter(Context context, List<Item> items) {
         this.context = context;
@@ -40,6 +44,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 .load(items.get(position).getImage())
                 .override(90,100)
                 .into(holder.imageView);
+
+
+        holder.nameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
 
     }
 

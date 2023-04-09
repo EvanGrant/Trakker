@@ -26,6 +26,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     private ArrayList<CourseModel> courseModelArrayList;
     private static final String TAG = "CourseAdapter";
     private Context mContext;
+
     public CourseAdapter(ArrayList<CourseModel> courseModelArrayList, Context context) {
         this.courseModelArrayList = courseModelArrayList;
         mContext = context;

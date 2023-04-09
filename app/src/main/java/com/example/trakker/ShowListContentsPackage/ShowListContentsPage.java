@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.trakker.R;
 
@@ -17,6 +19,11 @@ public class ShowListContentsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_list_contents_page);
+
+        Intent intent = getIntent();
+        int passedListID = intent.getIntExtra("listid", 0);
+
+        Toast.makeText(this, "list id" + passedListID, Toast.LENGTH_SHORT).show();
 
         RecyclerView recyclerView = findViewById(R.id.rvShowListContents);
 
