@@ -26,6 +26,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mIDs = new ArrayList<>();
+
     private Context mContext;
     private int passedUserID;
 
@@ -35,6 +36,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         mContext = context;
         mIDs = ids;
         passedUserID = userID;
+
 
     }
 
@@ -65,8 +67,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                 String passedID = mIDs.get(holder.getAbsoluteAdapterPosition());
+                String passedMediaType = "movie";
 
-                passData(passedID, mContext);
+                passData(passedID, passedMediaType, mContext);
 
             }
         });
@@ -89,10 +92,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    private void passData(String id, Context context) {
+    private void passData(String id, String mediatype, Context context) {
 
         Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
         intent.putExtra("id", id);
+        intent.putExtra("mediatype", mediatype);
         intent.putExtra("passedUserID", passedUserID);
         context.startActivity(intent);
 

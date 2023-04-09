@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.trakker.AddItemToListPackage.AddItemToListPage;
 import com.example.trakker.MainPagePackage.MainPage;
 import com.google.common.collect.Lists;
 
@@ -79,6 +80,20 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         moviePoster = findViewById(R.id.moviePosterImageView);
         movieOverview = findViewById(R.id.movieOverViewTextView);
         movieBackdrop = findViewById(R.id.movieBackdropImageView);
+
+        addItemToListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), AddItemToListPage.class);
+
+                intent.putExtra("mediaid", passedMediaID);
+                intent.putExtra("mediatype", passedMediaType);
+
+                view.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 

@@ -71,9 +71,7 @@ public class ShowListsPage extends AppCompatActivity {
         //listNames.add(new ListItems("another list", 4));
 
         try {
-
             run();
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -93,7 +91,7 @@ public class ShowListsPage extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://10.0.2.2:4000/lists/" + "2")
+                .url("http://10.0.2.2:4000/lists/" + g.getUserID())
                 .build();
 
         Callback callback = new Callback() {

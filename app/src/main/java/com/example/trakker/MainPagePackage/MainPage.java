@@ -52,18 +52,19 @@ public class MainPage extends AppCompatActivity {
     private ArrayList<String> topRatedMovieTitleArray = new ArrayList<>();
     private ArrayList<String> topRatedMoviePosterArray = new ArrayList<>();
     private ArrayList<String> topRatedMoviesIDArray = new ArrayList<>();
-
+    private ArrayList<String> topRatedMoviesMediaType = new ArrayList<>();
 
     private String popularMoviesUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
     private ArrayList<String> popularMovieTitleArray = new ArrayList<>();
     private ArrayList<String> popularMoviePosterArray = new ArrayList<>();
     private ArrayList<String> popularMoviesIDArray = new ArrayList<>();
-
+    private ArrayList<String> popularMoviesMediaType = new ArrayList<>();
 
     private String newReleasesMoviesUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
     private ArrayList<String> newReleasesMovieTitleArray = new ArrayList<>();
     private ArrayList<String> newReleasesMoviePosterArray = new ArrayList<>();
     private ArrayList<String> newReleasesMoviesIDArray = new ArrayList<>();
+    private ArrayList<String> newReleasesMoviesMediaType = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +163,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             topRatedMoviesIDArray.add(movieID);
                             topRatedMovieTitleArray.add(movieTitle);
                             topRatedMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //topRatedMoviesMediaType.add(mediaType);
 
                         }
                     }
@@ -222,10 +225,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             popularMoviesIDArray.add(movieID);
                             popularMovieTitleArray.add(movieTitle);
                             popularMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //topRatedMoviesMediaType.add(mediaType);
 
                         }
                     }
@@ -282,10 +287,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             newReleasesMoviesIDArray.add(movieID);
                             newReleasesMovieTitleArray.add(movieTitle);
                             newReleasesMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //newReleasesMoviesMediaType.add(mediaType);
 
                         }
                     }
