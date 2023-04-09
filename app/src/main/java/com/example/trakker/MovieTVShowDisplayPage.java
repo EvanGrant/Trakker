@@ -38,8 +38,9 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
     public Button addItemToListButton;
     ArrayList<String> ListNameArray = new ArrayList<String>();
     ArrayList<Integer> ListIDArray = new ArrayList<Integer>();
-    String passedMovieID;
+    String passedMediaID;
     int passedUserID;
+    String passedMediaType;
     String posterURL;
     String backdropURL;
     String movieID;
@@ -54,13 +55,24 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         setContentView(R.layout.activity_movie_tvshow_display_page);
 
         Intent intent = getIntent();
-        passedMovieID = intent.getStringExtra("id");
+        passedMediaID = intent.getStringExtra("id");
         passedUserID = intent.getIntExtra("passedUserID", 0);
+        passedMediaType = intent.getStringExtra("mediatype");
 
         Toast.makeText(this, "User ID: " + passedUserID, Toast.LENGTH_SHORT).show();
 
-        GetData(passedMovieID);
-        GetAllLists(passedUserID);
+        if (passedMediaType.equals("movie"))
+        {
+            GetDataMovie(passedMediaID);
+        }
+        else if (passedMediaType.equals("tv"))
+        {
+            GetDataTV(passedMediaID);
+        }
+
+
+
+        //GetAllLists(passedUserID);
 
         addItemToListButton = findViewById(R.id.addItemButton);
         movieName = findViewById(R.id.movieNameTextView);
@@ -70,7 +82,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
     }
 
-    private void GetData(String id) {
+    private void GetDataMovie(String id) {
 
         String url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
 
@@ -129,6 +141,69 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         // queue to fetch all the json data.
         mRequestQueue.add(jsonObjectRequest);
     }
+
+    private void GetDataTV(String id) {
+
+        String url = "https://api.themoviedb.org/3/tv/" + id + "?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US";
+
+
+
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    // now we get our response from API in json object format.
+                    // in below line we are extracting a string with its key
+                    // value from our json object.
+                    // similarly we are extracting all the strings from our json object.
+                    String name = response.getString("original_name");
+                    String overview = response.getString("overview");
+                    String ID = response.getString("id");
+                    String URL = response.getString("poster_path");
+                    String backdrop = response.getString("backdrop_path");
+
+                    // after extracting all the data we are
+                    // setting that data to all our views.
+                    movieName.setText(name);
+                    movieOverview.setText(overview);
+                    movieID = ID;
+                    posterURL = URL;
+                    backdropURL = backdrop;
+
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + posterURL)
+                            .into(moviePoster);
+
+                    Glide.with(getApplicationContext())
+                            .load("https://image.tmdb.org/t/p/w500" + backdropURL)
+                            .into(movieBackdrop);
+
+
+                } catch (JSONException e) {
+                    // if we do not extract data from json object properly.
+                    // below line of code is use to handle json exception
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // this is the error listener method which
+            // we will call if we get any error from API.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // below line is use to display a toast message along with our error.
+                Toast.makeText(MovieTVShowDisplayPage.this, "Fail to get data..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // at last we are adding our json
+        // object request to our request
+        // queue to fetch all the json data.
+        mRequestQueue.add(jsonObjectRequest);
+    }
+
     public void GetAllLists(int userID){
 
         RequestQueue mRequestQueue;

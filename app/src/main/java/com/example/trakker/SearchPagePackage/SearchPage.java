@@ -180,6 +180,7 @@ public class SearchPage extends AppCompatActivity {
         movieBackDropArray.clear();
         moviePosterArray.clear();
         movieIDArray.clear();
+        mediaTypeArray.clear();
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
