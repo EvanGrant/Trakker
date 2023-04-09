@@ -43,6 +43,8 @@ public class SearchPage extends AppCompatActivity {
     ArrayList<String> movieTitleArray = new ArrayList<>();
     ArrayList<String> moviePosterArray = new ArrayList<>();
     ArrayList<String> movieBackDropArray = new ArrayList<>();
+    ArrayList<String> mediaTypeArray = new ArrayList<>();
+
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
@@ -220,8 +222,10 @@ public class SearchPage extends AppCompatActivity {
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
+                                mediaTypeArray.add(mediatype);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
+
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
                             }
                             else if (mediatype.equals("tv"))
                             {
@@ -234,8 +238,10 @@ public class SearchPage extends AppCompatActivity {
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
+                                mediaTypeArray.add(mediatype);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
+
                             }
                             else if (mediatype.equals("person"))
                             {
