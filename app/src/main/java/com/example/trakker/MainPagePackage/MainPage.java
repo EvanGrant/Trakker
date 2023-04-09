@@ -269,6 +269,7 @@ public class MainPage extends AppCompatActivity {
             {
 
                 //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+
                 Log.e("Res: ", response);
 
                 try
