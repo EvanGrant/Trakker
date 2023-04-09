@@ -150,12 +150,6 @@ public class SearchPage extends AppCompatActivity {
         // below line we are creating a new array list
         courseModelArrayList = new ArrayList<CourseModel>();
 
-        // below line is to add data to our array list.
-        /*
-        courseModelArrayList.add(new CourseModel("DSA", "DSA Self Paced Course"));
-        */
-        //getData();
-
         // initializing our adapter class.
         adapter = new CourseAdapter(courseModelArrayList, SearchPage.this);
 
@@ -271,35 +265,7 @@ public class SearchPage extends AppCompatActivity {
             }
         });
 
-
         mRequestQueue.add(mStringRequest);
+
     }
-
-
-
-
-    /*private void filter(String text) {
-        // creating a new array list to filter our data.
-        ArrayList<CourseModel> filteredlist = new ArrayList<CourseModel>();
-
-        // running a for loop to compare elements.
-        for (CourseModel item : courseModelArrayList) {
-            // checking if the entered string matched with any item of our recycler view.
-            if (item.getCourseName().toLowerCase().contains(text.toLowerCase())) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredlist.add(item);
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
-            //Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
-        } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            adapter.filterList(filteredlist);
-        }
-    }*/
-
 }
