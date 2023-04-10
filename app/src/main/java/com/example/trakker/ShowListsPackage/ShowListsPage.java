@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,12 +24,19 @@ import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.LogTime;
+import com.example.trakker.CreateNewListPage;
 import com.example.trakker.GlobalClass;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.MainPagePackage.MyRecyclerViewAdapter;
 import com.example.trakker.R;
+import com.example.trakker.Registration;
+import com.example.trakker.SearchPagePackage.SearchPage;
 import com.example.trakker.ShowListContentsPackage.Item;
 import com.example.trakker.ShowListContentsPackage.MyAdapter;
+import com.example.trakker.UserAccountPage;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +60,8 @@ public class ShowListsPage extends AppCompatActivity {
     RecyclerView recyclerView;
     ShowListsAdapter adapter;
 
+    FloatingActionButton addlistbutton;
+
     GlobalClass g = new GlobalClass();
 
     List<ListItems> listNames = new ArrayList<ListItems>();
@@ -58,8 +70,6 @@ public class ShowListsPage extends AppCompatActivity {
 
     Context context = this;
 
-
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +91,54 @@ public class ShowListsPage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ShowListsAdapter(getApplicationContext(), listNames);
         recyclerView.setAdapter(adapter);
+
+        addlistbutton = findViewById(R.id.addListButton);
+
+        addlistbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(view.getContext(), CreateNewListPage.class);
+                view.getContext().startActivity(intent);
+
+            }
+        });
+
+        // Initialize and assign bottom navigation view
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
+
+        // Perform item selected listener for bottom navigation
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId())
+                {
+                    case R.id.UserAccount:
+                        startActivity(new Intent(getApplicationContext(), UserAccountPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.MainPage:
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Search:
+                        startActivity(new Intent(getApplicationContext(), SearchPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+                }
+
+                return false;
+
+            }
+        });
 
 
     }

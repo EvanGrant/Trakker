@@ -2,6 +2,7 @@ package com.example.trakker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +24,20 @@ public class CreateNewListPage extends AppCompatActivity {
 
                 //ListRequest.CreateNewList
 
-                //Intent intent = new Intent(view.getContext(), Registration.class);
-                //view.getContext().startActivity(intent);
+                Intent intent = new Intent(view.getContext(), Registration.class);
+                view.getContext().startActivity(intent);
 
             }
         });
+    }
+
+
+    public void CreateNewList(){
+
+
+
 
 
     }
+
 }

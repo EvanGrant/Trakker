@@ -87,12 +87,6 @@ public class MainPage extends AppCompatActivity {
         getDataPopularMovies();
         getNewReleasesMovies();
 
-        // Initialize and assign bottom navigation view
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-
-        // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.MainPage);
-
         ListsButton = findViewById(R.id.myListsButton);
 
         ListsButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +96,12 @@ public class MainPage extends AppCompatActivity {
                 view.getContext().startActivity(intent);
             }
         });
+
+        // Initialize and assign bottom navigation view
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
 
         // Perform item selected listener for bottom navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
