@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,10 +20,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.trakker.CreateNewListPage;
 import com.example.trakker.GlobalClass;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.R;
+import com.example.trakker.SearchPagePackage.SearchPage;
 import com.example.trakker.ShowListsPackage.ListItems;
 import com.example.trakker.ShowListsPackage.ShowListsAdapter;
 import com.example.trakker.ShowListsPackage.ShowListsPage;
+import com.example.trakker.UserAccountPage;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +84,42 @@ public class AddItemToListPage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AddItemToListAdapter(getApplicationContext(), listNames, passedMediaID, passedMediaType, passMediaName, passedMediaPosterURL);
         recyclerView.setAdapter(adapter);
+
+        // Initialize and assign bottom navigation view
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
+
+        // Perform item selected listener for bottom navigation
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId())
+                {
+                    case R.id.UserAccount:
+                        startActivity(new Intent(getApplicationContext(), UserAccountPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.MainPage:
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Search:
+                        startActivity(new Intent(getApplicationContext(), SearchPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+                }
+
+                return false;
+
+            }
+        });
 
     }
 

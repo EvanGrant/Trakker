@@ -78,6 +78,7 @@ public class MainPage extends AppCompatActivity {
         passedFirstName = intent.getStringExtra("firstname");
 
         passedUserID = g.getUserID();
+        passedFirstName = g.getUserFirstName();
 
         Toast.makeText(this, "User: " + passedUserID, Toast.LENGTH_SHORT).show();
 

@@ -145,6 +145,8 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
                 paramV.put("MovieId", String.valueOf(passedMediaID));
                 paramV.put("MediaType", passedMediaType);
                 paramV.put("posterURL", passedMediaPosterURL);
+                paramV.put("Title", passMediaName);
+
 
                 return paramV;
 

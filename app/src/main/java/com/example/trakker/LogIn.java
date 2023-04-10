@@ -54,7 +54,6 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         signinbutton = findViewById(R.id.signInBtn);
-
         createacctbutton = findViewById(R.id.CreateacctBtn);
 
         editTextEmail = findViewById(R.id.usernamelogin);
