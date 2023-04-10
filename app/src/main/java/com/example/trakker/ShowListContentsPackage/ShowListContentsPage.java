@@ -8,13 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.trakker.GlobalClass;
+import com.example.trakker.MainPagePackage.MainPage;
 import com.example.trakker.R;
+import com.example.trakker.SearchPagePackage.SearchPage;
 import com.example.trakker.ShowListsPackage.ListItems;
 import com.example.trakker.ShowListsPackage.ShowListsAdapter;
 import com.example.trakker.ShowListsPackage.ShowListsPage;
+import com.example.trakker.UserAccountPage;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +56,7 @@ public class ShowListContentsPage extends AppCompatActivity {
 
         Toast.makeText(this, "list id" + passedListID, Toast.LENGTH_SHORT).show();
 
-        //items.add(new Item("John wick","john.wick@email.com", "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"));
+
 
         try {
             run();
@@ -65,7 +70,42 @@ public class ShowListContentsPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //items.add(new Item("John wick","john.wick@email.com", "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"));
-        //items.add(new Item("Keanu Reeves","Keanu.Reeves@email.com", "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"));
+
+        // Initialize and assign bottom navigation view
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
+
+        // Perform item selected listener for bottom navigation
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId())
+                {
+                    case R.id.UserAccount:
+                        startActivity(new Intent(getApplicationContext(), UserAccountPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.MainPage:
+                        startActivity(new Intent(getApplicationContext(), MainPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Search:
+                        startActivity(new Intent(getApplicationContext(), SearchPage.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+                }
+
+                return false;
+
+            }
+        });
 
     }
 
