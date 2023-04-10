@@ -127,7 +127,8 @@ public class Registration extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Registration.this, "user is already in database", Toast.LENGTH_SHORT).show();
             }
-        }){
+        })
+        {
             protected Map<String, String> getParams(){
 
                 Map<String, String> paramV = new HashMap<>();
@@ -139,7 +140,9 @@ public class Registration extends AppCompatActivity {
                 return paramV;
 
             }
+
         };
+
         queue.add(stringRequest);
 
 
