@@ -46,13 +46,8 @@ public class LogIn extends AppCompatActivity {
     EditText editTextEmail;
     EditText editTextPassword;
 
-/*
-    ImageView testImageView;
-    //test image retrieval with volley and api
-    private RequestQueue mRequestQueue;
-    private StringRequest mStringRequest;
-    private String url = "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg";
-*/
+    public GlobalClass globalClass = new GlobalClass();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,11 +109,17 @@ public class LogIn extends AppCompatActivity {
 
                     returnObject = new JSONObject(response);
 
-                    userID = Integer.parseInt(returnObject.getString("id") );
+                    userID = Integer.parseInt(returnObject.getString("id"));
                     LastName = returnObject.getString("LastName");
                     FirstName = returnObject.getString("FirstName");
+                    email = returnObject.getString("Email");
 
                     if(userID > 0){
+
+                        globalClass.setUserID(userID);
+                        globalClass.setUserEmail(email);
+                        globalClass.setUserFirstName(FirstName);
+                        globalClass.setUserLastName(LastName);
 
                         Intent intent = new Intent(view.getContext(), MainPage.class);
 

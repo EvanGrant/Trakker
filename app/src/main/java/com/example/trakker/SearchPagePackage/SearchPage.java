@@ -43,6 +43,8 @@ public class SearchPage extends AppCompatActivity {
     ArrayList<String> movieTitleArray = new ArrayList<>();
     ArrayList<String> moviePosterArray = new ArrayList<>();
     ArrayList<String> movieBackDropArray = new ArrayList<>();
+    ArrayList<String> mediaTypeArray = new ArrayList<>();
+
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
@@ -52,8 +54,6 @@ public class SearchPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
-
-        //getData();
 
         // initializing our variables.
         courseRV = findViewById(R.id.idRVCourses);
@@ -150,12 +150,6 @@ public class SearchPage extends AppCompatActivity {
         // below line we are creating a new array list
         courseModelArrayList = new ArrayList<CourseModel>();
 
-        // below line is to add data to our array list.
-        /*
-        courseModelArrayList.add(new CourseModel("DSA", "DSA Self Paced Course"));
-        */
-        //getData();
-
         // initializing our adapter class.
         adapter = new CourseAdapter(courseModelArrayList, SearchPage.this);
 
@@ -180,6 +174,7 @@ public class SearchPage extends AppCompatActivity {
         movieBackDropArray.clear();
         moviePosterArray.clear();
         movieIDArray.clear();
+        mediaTypeArray.clear();
 
         // RequestQueue initialized
         mRequestQueue = Volley.newRequestQueue(this);
@@ -191,9 +186,10 @@ public class SearchPage extends AppCompatActivity {
             public void onResponse(String response)
             {
 
-                Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
 
                 Log.e("Res: ", response);
+
                 try
                 {
 
@@ -221,8 +217,10 @@ public class SearchPage extends AppCompatActivity {
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
+                                mediaTypeArray.add(mediatype);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
+
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
                             }
                             else if (mediatype.equals("tv"))
                             {
@@ -235,8 +233,10 @@ public class SearchPage extends AppCompatActivity {
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
+                                mediaTypeArray.add(mediatype);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
+
                             }
                             else if (mediatype.equals("person"))
                             {
@@ -255,6 +255,7 @@ public class SearchPage extends AppCompatActivity {
                 }
 
 
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -265,33 +266,6 @@ public class SearchPage extends AppCompatActivity {
         });
 
         mRequestQueue.add(mStringRequest);
+
     }
-
-
-
-
-    /*private void filter(String text) {
-        // creating a new array list to filter our data.
-        ArrayList<CourseModel> filteredlist = new ArrayList<CourseModel>();
-
-        // running a for loop to compare elements.
-        for (CourseModel item : courseModelArrayList) {
-            // checking if the entered string matched with any item of our recycler view.
-            if (item.getCourseName().toLowerCase().contains(text.toLowerCase())) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredlist.add(item);
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
-            //Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
-        } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            adapter.filterList(filteredlist);
-        }
-    }*/
-
 }

@@ -22,9 +22,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trakker.GlobalClass;
 import com.example.trakker.ListPage;
 import com.example.trakker.R;
 import com.example.trakker.SearchPagePackage.SearchPage;
+import com.example.trakker.ShowListsPackage.ShowListsPage;
 import com.example.trakker.UserAccountPage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,7 +37,7 @@ public class MainPage extends AppCompatActivity {
 
     private static final String TAG = "MainPage";
 
-
+    GlobalClass g = new GlobalClass();
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
@@ -50,18 +52,19 @@ public class MainPage extends AppCompatActivity {
     private ArrayList<String> topRatedMovieTitleArray = new ArrayList<>();
     private ArrayList<String> topRatedMoviePosterArray = new ArrayList<>();
     private ArrayList<String> topRatedMoviesIDArray = new ArrayList<>();
-
+    private ArrayList<String> topRatedMoviesMediaType = new ArrayList<>();
 
     private String popularMoviesUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
     private ArrayList<String> popularMovieTitleArray = new ArrayList<>();
     private ArrayList<String> popularMoviePosterArray = new ArrayList<>();
     private ArrayList<String> popularMoviesIDArray = new ArrayList<>();
-
+    private ArrayList<String> popularMoviesMediaType = new ArrayList<>();
 
     private String newReleasesMoviesUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a5c71b671673e424ff2b1612c09940d1&language=en-US&page=1";
     private ArrayList<String> newReleasesMovieTitleArray = new ArrayList<>();
     private ArrayList<String> newReleasesMoviePosterArray = new ArrayList<>();
     private ArrayList<String> newReleasesMoviesIDArray = new ArrayList<>();
+    private ArrayList<String> newReleasesMoviesMediaType = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,8 @@ public class MainPage extends AppCompatActivity {
         passedUserID = intent.getIntExtra("userID", 0);
         passedFirstName = intent.getStringExtra("firstname");
 
+        passedUserID = g.getUserID();
+
         Toast.makeText(this, "User: " + passedUserID, Toast.LENGTH_SHORT).show();
 
         welcomeTextBox.setText("Welcome " + passedFirstName);
@@ -82,20 +87,21 @@ public class MainPage extends AppCompatActivity {
         getDataPopularMovies();
         getNewReleasesMovies();
 
-        // Initialize and assign bottom navigation view
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-
-        // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.MainPage);
-
         ListsButton = findViewById(R.id.myListsButton);
 
         ListsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ListPage.class);
-                view.getContext().startActivity(intent);}
+                Intent intent = new Intent(view.getContext(), ShowListsPage.class);
+                view.getContext().startActivity(intent);
+            }
         });
+
+        // Initialize and assign bottom navigation view
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.MainPage);
 
         // Perform item selected listener for bottom navigation
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -157,10 +163,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             topRatedMoviesIDArray.add(movieID);
                             topRatedMovieTitleArray.add(movieTitle);
                             topRatedMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //topRatedMoviesMediaType.add(mediaType);
 
                         }
                     }
@@ -217,10 +225,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             popularMoviesIDArray.add(movieID);
                             popularMovieTitleArray.add(movieTitle);
                             popularMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //topRatedMoviesMediaType.add(mediaType);
 
                         }
                     }
@@ -259,6 +269,7 @@ public class MainPage extends AppCompatActivity {
             {
 
                 //Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+
                 Log.e("Res: ", response);
 
                 try
@@ -277,10 +288,12 @@ public class MainPage extends AppCompatActivity {
                             String movieID = movie.getString("id");
                             String movieTitle = movie.getString("original_title");
                             String moviePoster = movie.getString("poster_path");
+                            //String mediaType = movie.getString("media_type");
 
                             newReleasesMoviesIDArray.add(movieID);
                             newReleasesMovieTitleArray.add(movieTitle);
                             newReleasesMoviePosterArray.add("https://image.tmdb.org/t/p/w500/" + moviePoster);
+                            //newReleasesMoviesMediaType.add(mediaType);
 
                         }
                     }
@@ -313,19 +326,19 @@ public class MainPage extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.rvAnimals);
         recyclerView.setLayoutManager(layoutManager);
-        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray);
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this, topRatedMovieTitleArray, topRatedMoviePosterArray, topRatedMoviesIDArray, passedUserID);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView2 = findViewById(R.id.rvAnimals2);
         recyclerView2.setLayoutManager(layoutManager2);
-        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, popularMovieTitleArray, popularMoviePosterArray, popularMoviesIDArray);
+        MyRecyclerViewAdapter adapter2 = new MyRecyclerViewAdapter(this, popularMovieTitleArray, popularMoviePosterArray, popularMoviesIDArray, passedUserID);
         recyclerView2.setAdapter(adapter2);
 
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView3 = findViewById(R.id.rvAnimals3);
         recyclerView3.setLayoutManager(layoutManager3);
-        MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray, newReleasesMoviesIDArray);
+        MyRecyclerViewAdapter adapter3 = new MyRecyclerViewAdapter(this, newReleasesMovieTitleArray, newReleasesMoviePosterArray, newReleasesMoviesIDArray, passedUserID);
         recyclerView3.setAdapter(adapter3);
     }
 

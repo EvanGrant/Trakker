@@ -15,6 +15,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="32">
         <activity
+            android:name=".AddItemToListPackage.AddItemToListPage"
+            android:exported="false" />
+        <activity
+            android:name=".ShowListsPackage.ShowListsPage"
+            android:exported="false" />
+        <activity
             android:name=".ShowListContentsPackage.ShowListContentsPage"
             android:exported="false" />
         <activity
@@ -64,7 +70,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
     </application>

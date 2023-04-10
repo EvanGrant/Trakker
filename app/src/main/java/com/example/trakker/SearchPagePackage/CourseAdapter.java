@@ -26,6 +26,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     private ArrayList<CourseModel> courseModelArrayList;
     private static final String TAG = "CourseAdapter";
     private Context mContext;
+
     public CourseAdapter(ArrayList<CourseModel> courseModelArrayList, Context context) {
         this.courseModelArrayList = courseModelArrayList;
         mContext = context;
@@ -66,14 +67,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                //Log.d(TAG, "onClick: clicked on an image: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
-                //Toast.makeText(mContext, holder.courseNameTV.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, model.getCourseID() + " " + model.getCourseName() + " " + model.getCourseType(), Toast.LENGTH_SHORT).show();
 
                 Log.d(TAG, "Clicked on: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()));
-                Log.d(TAG, "Clicked on: " + model.getCourseName());
+                //Log.d(TAG, "Clicked on: " + model.getCourseName());
+                Log.d(TAG, "Clicked on: " + model.getCourseType());
 
+                String passedmediatype = model.getCourseType();
                 String passedID = model.getCourseID();
 
-                passData(passedID, mContext);
+                passData(passedID, passedmediatype, mContext);
 
             }
         });
@@ -102,10 +105,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         }
     }
 
-    private void passData(String id, Context context) {
+    private void passData(String id, String mediatype, Context context) {
 
         Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
         intent.putExtra("id", id);
+        intent.putExtra("mediatype", mediatype);
         context.startActivity(intent);
 
     }
