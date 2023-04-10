@@ -77,7 +77,7 @@ public class AddItemToListPage extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rvAddItemToLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AddItemToListAdapter(getApplicationContext(), listNames);
+        adapter = new AddItemToListAdapter(getApplicationContext(), listNames, passedMediaID, passedMediaType, passMediaName, passedMediaPosterURL);
         recyclerView.setAdapter(adapter);
 
     }

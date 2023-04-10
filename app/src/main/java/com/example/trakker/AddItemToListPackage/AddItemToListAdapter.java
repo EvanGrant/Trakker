@@ -40,12 +40,21 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
     Context mContext;
     List<ListItems> userLists;
 
+    int passedMediaID;
+    String passedMediaType;
+    String passMediaName;
+    String passedMediaPosterURL;
+
 
     private static final String TAG = "ShowListsAdapter";
 
-    public AddItemToListAdapter (Context context, List<ListItems> userLists){
+    public AddItemToListAdapter (Context context, List<ListItems> userLists, int passedMediaID, String passedMediaType, String passMediaName, String passedMediaPosterURL){
         this.mContext = context;
         this.userLists = userLists;
+        this.passedMediaID = passedMediaID;
+        this.passedMediaPosterURL = passedMediaPosterURL;
+        this.passedMediaType = passedMediaType;
+        this.passMediaName = passMediaName;
     }
 
     @NonNull
@@ -71,7 +80,7 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
 
                 //int passedID = model.getListID();
 
-                //passData(passedID, mContext);
+                RegisterItemToList(model.getListID(), view);
 
             }
         });
@@ -83,7 +92,7 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
         return userLists.size();
     }
 
-    public void RegisterList(String passedListName, View v){
+    public void RegisterItemToList(int listID, View v){
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
         String url = "http://10.0.2.2:4000/listsToMovies/";
@@ -102,7 +111,7 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
 
                             if(userID > 0){
 
-                                Intent intent = new Intent(v.getContext(), ShowListsPage.class);
+                                Intent intent = new Intent(v.getContext(), MainPage.class);
 
                                 v.getContext().startActivity(intent);
 
@@ -132,8 +141,10 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
             protected Map<String, String> getParams(){
 
                 Map<String, String> paramV = new HashMap<>();
-                //paramV.put("UserId", String.valueOf(userID));
-                paramV.put("ListName", passedListName);
+                paramV.put("ListId", String.valueOf(listID));
+                paramV.put("MovieId", String.valueOf(passedMediaID));
+                paramV.put("MediaType", passedMediaType);
+                paramV.put("posterURL", passedMediaPosterURL);
 
                 return paramV;
 

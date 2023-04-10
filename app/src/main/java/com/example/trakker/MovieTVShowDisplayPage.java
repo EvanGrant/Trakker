@@ -88,7 +88,9 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(), AddItemToListPage.class);
 
-                intent.putExtra("mediaid", passedMediaID);
+                int mediaIDConvertToInt = Integer.parseInt(passedMediaID);
+
+                intent.putExtra("mediaid", (mediaIDConvertToInt));
                 intent.putExtra("mediatype", passedMediaType);
                 intent.putExtra("posterurl", posterURL);
                 intent.putExtra("medianame", mediaName);
