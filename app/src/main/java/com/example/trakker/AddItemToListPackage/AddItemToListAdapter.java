@@ -23,6 +23,7 @@ import com.example.trakker.R;
 import com.example.trakker.Registration;
 import com.example.trakker.ShowListContentsPackage.ShowListContentsPage;
 import com.example.trakker.ShowListsPackage.ListItems;
+import com.example.trakker.ShowListsPackage.ShowListsPage;
 import com.example.trakker.ShowListsPackage.ShowListsViewHolder;
 
 import org.json.JSONObject;
@@ -31,11 +32,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListViewHolder> {
 
     GlobalClass globalClass = new GlobalClass();
     Context mContext;
     List<ListItems> userLists;
+
 
     private static final String TAG = "ShowListsAdapter";
 
@@ -79,17 +83,16 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
         return userLists.size();
     }
 
-    public void RegisterUser(View v){
+    public void RegisterList(String passedListName, View v){
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
-        String url = "http://10.0.2.2:4000/users/";
+        String url = "http://10.0.2.2:4000/listsToMovies/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Toast.makeText(mContext, "Added Item to List!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Added to List!", Toast.LENGTH_SHORT).show();
 
                         try {
 
@@ -97,28 +100,15 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
 
                             int userID = Integer.parseInt(returnObject.getString("id"));
 
-
                             if(userID > 0){
 
-                                String eMail = returnObject.getString("Email");
-                                String firstname = returnObject.getString("FirstName");
-                                String lastname = returnObject.getString("LastName");
-
-                                Intent intent = new Intent(v.getContext(), MainPage.class);
-
-                                globalClass.setUserID(userID);
-                                globalClass.setUserEmail(eMail);
-                                globalClass.setUserFirstName(firstname);
-                                globalClass.setUserLastName(lastname);
-
-                                //intent.putExtra("userID", userID);
-                                //intent.putExtra("firstname", fName);
+                                Intent intent = new Intent(v.getContext(), ShowListsPage.class);
 
                                 v.getContext().startActivity(intent);
 
                             }else{
 
-                                Toast.makeText(mContext, "Could not add item to list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "Invalid Addition to List", Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -135,19 +125,15 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "user is already in database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "list is already in database", Toast.LENGTH_SHORT).show();
             }
         }){
+
             protected Map<String, String> getParams(){
 
-
                 Map<String, String> paramV = new HashMap<>();
-                /*
-                paramV.put("FirstName", fName);
-                paramV.put("LastName", lName);
-                paramV.put("Email", email);
-                paramV.put("Password", password);
-                */
+                //paramV.put("UserId", String.valueOf(userID));
+                paramV.put("ListName", passedListName);
 
                 return paramV;
 

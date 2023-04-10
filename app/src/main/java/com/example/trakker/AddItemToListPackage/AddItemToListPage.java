@@ -8,10 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.trakker.CreateNewListPage;
 import com.example.trakker.GlobalClass;
 import com.example.trakker.R;
 import com.example.trakker.ShowListsPackage.ListItems;
@@ -24,7 +30,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,6 +48,8 @@ public class AddItemToListPage extends AppCompatActivity {
 
     int passedMediaID;
     String passedMediaType;
+    String passMediaName;
+    String passedMediaPosterURL;
 
     GlobalClass g = new GlobalClass();
 
@@ -55,6 +65,9 @@ public class AddItemToListPage extends AppCompatActivity {
         Intent intent = getIntent();
         passedMediaID = intent.getIntExtra("mediaid", 0);
         passedMediaType = intent.getStringExtra("mediatype");
+        passedMediaPosterURL = intent.getStringExtra("posterurl");
+        passMediaName = intent.getStringExtra("medianame");
+
 
         try {
             run();
