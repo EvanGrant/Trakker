@@ -68,11 +68,10 @@ public class ShowListsAdapter extends RecyclerView.Adapter<ShowListsViewHolder> 
 
     private void passData(int id, Context context) {
 
-        Intent intent = new Intent(context, ShowListContentsPage.class);
-        intent.putExtra("listid", id);
-        context.startActivity(intent);
-
-
+        Intent intent1 = new Intent(context, ShowListContentsPage.class);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent1.putExtra("listid", id);
+        context.startActivity(intent1);
 
     }
 
