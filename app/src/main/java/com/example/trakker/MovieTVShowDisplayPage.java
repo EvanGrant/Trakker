@@ -45,6 +45,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
     String posterURL;
     String backdropURL;
     String movieID;
+    String mediaName;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     private JSONObject returnObject;
@@ -89,6 +90,8 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
 
                 intent.putExtra("mediaid", passedMediaID);
                 intent.putExtra("mediatype", passedMediaType);
+                intent.putExtra("posterurl", posterURL);
+                intent.putExtra("medianame", mediaName);
 
                 view.getContext().startActivity(intent);
 
@@ -124,6 +127,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     movieName.setText(name);
                     movieOverview.setText(overview);
                     movieID = ID;
+                    mediaName = name;
                     posterURL = URL;
                     backdropURL = backdrop;
 
