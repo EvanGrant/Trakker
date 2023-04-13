@@ -54,7 +54,7 @@ public class ShowListContentsPage extends AppCompatActivity {
         Intent intent1 = getIntent();
         passedListID = intent1.getIntExtra("listid", 0);
 
-        Toast.makeText(this, "list id" + passedListID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "list id" + passedListID, Toast.LENGTH_SHORT).show();
 
 
 

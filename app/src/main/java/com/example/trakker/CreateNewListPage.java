@@ -103,7 +103,7 @@ public class CreateNewListPage extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CreateNewListPage.this, "list is already in database", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CreateNewListPage.this, "list is already in database", Toast.LENGTH_SHORT).show();
             }
         }){
 

@@ -64,7 +64,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + mNames.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
-                Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mNames.get(holder.getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
 
                 String passedID = mIDs.get(holder.getAbsoluteAdapterPosition());
                 String passedMediaType = "movie";

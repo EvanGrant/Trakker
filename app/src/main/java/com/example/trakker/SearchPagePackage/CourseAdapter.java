@@ -67,7 +67,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                //Log.d(TAG, "onClick: clicked on an image: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()) + "ID: " + mIDs.get(holder.getAbsoluteAdapterPosition()));
-                Toast.makeText(mContext, model.getCourseID() + " " + model.getCourseName() + " " + model.getCourseType(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, model.getCourseID() + " " + model.getCourseName() + " " + model.getCourseType(), Toast.LENGTH_SHORT).show();
 
                 Log.d(TAG, "Clicked on: " + courseModelArrayList.get(holder.getAbsoluteAdapterPosition()));
                 //Log.d(TAG, "Clicked on: " + model.getCourseName());

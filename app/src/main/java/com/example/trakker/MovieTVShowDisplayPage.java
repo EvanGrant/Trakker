@@ -63,7 +63,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         passedMediaType = intent.getStringExtra("mediatype");
         passedMediaName = intent.getStringExtra("medianame");
 
-        Toast.makeText(this, "User ID: " + passedUserID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "User ID: " + passedUserID, Toast.LENGTH_SHORT).show();
 
         if (passedMediaType.equals("movie"))
         {
