@@ -75,8 +75,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
                 String passedmediatype = model.getCourseType();
                 String passedID = model.getCourseID();
+                String passedmedianame = model.getCourseName();
 
-                passData(passedID, passedmediatype, mContext);
+                passData(passedID, passedmediatype, passedmedianame, mContext);
 
             }
         });
@@ -105,11 +106,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         }
     }
 
-    private void passData(String id, String mediatype, Context context) {
+    private void passData(String id, String mediatype, String medianame, Context context) {
 
         Intent intent = new Intent(context, MovieTVShowDisplayPage.class);
         intent.putExtra("id", id);
         intent.putExtra("mediatype", mediatype);
+        intent.putExtra("medianame", medianame);
         context.startActivity(intent);
 
     }

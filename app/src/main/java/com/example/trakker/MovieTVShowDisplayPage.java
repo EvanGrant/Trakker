@@ -46,6 +46,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
     String backdropURL;
     String movieID;
     String mediaName;
+    String passedMediaName;
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
     private JSONObject returnObject;
@@ -60,6 +61,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
         passedMediaID = intent.getStringExtra("id");
         passedUserID = intent.getIntExtra("passedUserID", 0);
         passedMediaType = intent.getStringExtra("mediatype");
+        passedMediaName = intent.getStringExtra("medianame");
 
         Toast.makeText(this, "User ID: " + passedUserID, Toast.LENGTH_SHORT).show();
 
@@ -194,6 +196,7 @@ public class MovieTVShowDisplayPage extends AppCompatActivity {
                     movieID = ID;
                     posterURL = URL;
                     backdropURL = backdrop;
+                    mediaName = name;
 
                     Glide.with(getApplicationContext())
                             .load("https://image.tmdb.org/t/p/w500" + posterURL)

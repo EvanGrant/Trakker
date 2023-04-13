@@ -140,13 +140,12 @@ public class ShowListContentsPage extends AppCompatActivity {
                         String movieID = list.getString("MovieId");
                         String mediaType = list.getString("MediaType");
                         String posterURL = list.getString("posterURL");
+                        String mediaName = list.getString("Title");
 
                         //items.add(new Item("Keanu Reeves","Keanu.Reeves@email.com", "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"));
-                        items.add(new Item(mediaType, movieID, "https://image.tmdb.org/t/p/w500/" + posterURL));
-
+                        items.add(new Item(mediaName, movieID, "https://image.tmdb.org/t/p/w500/" + posterURL));
 
                     }
-
 
 
                 } catch (JSONException e) {
