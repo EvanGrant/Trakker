@@ -11,15 +11,17 @@ public class CourseModel {
     private String Backdrop;
     private String courseID;
     private String courseType;
+    private String releaseDate;
 
     // creating constructor for our variables.
-    public CourseModel(String courseName, String courseDescription, String poster, String backdrop, String courseID, String courseType) {
+    public CourseModel(String courseName, String courseDescription, String poster, String backdrop, String courseID, String courseType, String releaseDate) {
         this.courseName = courseName;
         this.courseDescription = courseDescription;
         this.Poster = "https://image.tmdb.org/t/p/w500/" + poster;
         this.Backdrop = "https://image.tmdb.org/t/p/w500/" + backdrop;
         this.courseID = courseID;
         this.courseType = courseType;
+        this.releaseDate = releaseDate;
     }
 
     // creating getter and setter methods.
@@ -67,6 +69,12 @@ public class CourseModel {
 
     public void setCourseType(String courseType) {
         this.courseType = courseType;
+    }
+
+    public String getReleaseDate() { return releaseDate; }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
 

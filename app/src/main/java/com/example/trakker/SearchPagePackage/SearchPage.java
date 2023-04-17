@@ -38,12 +38,13 @@ public class SearchPage extends AppCompatActivity {
     // variable for our adapter
     // class and array list
     private CourseAdapter adapter;
-    private ArrayList<CourseModel> courseModelArrayList;
+    ArrayList<CourseModel> courseModelArrayList = new ArrayList<>();;
     ArrayList<String> movieIDArray = new ArrayList<>();
     ArrayList<String> movieTitleArray = new ArrayList<>();
     ArrayList<String> moviePosterArray = new ArrayList<>();
     ArrayList<String> movieBackDropArray = new ArrayList<>();
     ArrayList<String> mediaTypeArray = new ArrayList<>();
+    ArrayList<String> mediaReleaseDateArray = new ArrayList<>();
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
@@ -148,7 +149,7 @@ public class SearchPage extends AppCompatActivity {
     private void buildRecyclerView() {
 
         // below line we are creating a new array list
-        courseModelArrayList = new ArrayList<CourseModel>();
+        //courseModelArrayList = new ArrayList<CourseModel>();
 
         // initializing our adapter class.
         adapter = new CourseAdapter(courseModelArrayList, SearchPage.this);
@@ -169,7 +170,7 @@ public class SearchPage extends AppCompatActivity {
     private void getData(String query) {
 
         courseModelArrayList.clear();
-
+        mediaReleaseDateArray.clear();
         movieTitleArray.clear();
         movieBackDropArray.clear();
         moviePosterArray.clear();
@@ -212,15 +213,19 @@ public class SearchPage extends AppCompatActivity {
                                 String movieTitle = movie.getString("title");
                                 String moviePoster = movie.getString("poster_path");
                                 String backDropPoster = movie.getString("backdrop_path");
+                                String releaseDate = movie.getString("release_date");
 
                                 movieIDArray.add(movieID);
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
                                 mediaTypeArray.add(mediatype);
+                                mediaReleaseDateArray.add(releaseDate);
 
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype, releaseDate));
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
+                                adapter.notifyDataSetChanged();
+
                             }
                             else if (mediatype.equals("tv"))
                             {
@@ -228,14 +233,19 @@ public class SearchPage extends AppCompatActivity {
                                 String movieTitle = movie.getString("name");
                                 String moviePoster = movie.getString("poster_path");
                                 String backDropPoster = movie.getString("backdrop_path");
+                                String releaseDate = movie.getString("first_air_date");
 
                                 movieIDArray.add(movieID);
                                 movieTitleArray.add(movieTitle);
                                 moviePosterArray.add(moviePoster);
                                 movieBackDropArray.add(backDropPoster);
                                 mediaTypeArray.add(mediatype);
+                                mediaReleaseDateArray.add(releaseDate);
 
-                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype));
+                                courseModelArrayList.add(new CourseModel(movieTitle, movieID, moviePoster, backDropPoster, movieID, mediatype, releaseDate));
+
+                                adapter.notifyDataSetChanged();
+
 
                             }
                             else if (mediatype.equals("person"))

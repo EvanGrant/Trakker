@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.example.trakker.MovieTVShowDisplayPage;
 import com.example.trakker.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 //FOR SEARCH PAGE RECYCLERVIEW
@@ -55,7 +57,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         // setting data to our views of recycler view.
         CourseModel model = courseModelArrayList.get(position);
         holder.courseNameTV.setText(model.getCourseName());
-        holder.courseDescTV.setText(model.getCourseDescription());
+        holder.courseNameReleaseDateTV.setText(model.getReleaseDate());
 
         Glide.with(mContext)
                 .asBitmap()
@@ -93,16 +95,18 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // creating variables for our views.
         private final TextView courseNameTV;
-        private final TextView courseDescTV;
+        //private final TextView courseDescTV;
         private final ImageView coursePosterTV;
+        private final TextView courseNameReleaseDateTV;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our views with their ids.
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
-            courseDescTV = itemView.findViewById(R.id.idTVCourseDescription);
+            courseNameReleaseDateTV = itemView.findViewById(R.id.idTVCourseDescription);
             coursePosterTV = itemView.findViewById(R.id.idTVPosterImageView);
+
         }
     }
 
