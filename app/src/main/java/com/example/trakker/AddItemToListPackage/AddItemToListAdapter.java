@@ -76,7 +76,7 @@ public class AddItemToListAdapter extends RecyclerView.Adapter<AddItemToListView
 
                 Log.d(TAG, "Clicked on: " + model.getListID());
                 Log.d(TAG, "Clicked on: " + model.getListName());
-                Toast.makeText(mContext, model.getListID() + " " + model.getListName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, model.getListID() + " " + model.getListName(), Toast.LENGTH_SHORT).show();
 
                 //int passedID = model.getListID();
 

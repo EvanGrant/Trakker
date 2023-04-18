@@ -54,7 +54,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         Glide.with(mContext)
                 .asBitmap()
                 .load(mImageUrls.get(position))
-                .override(90,100)
+                .override(100,100)
                 .into(holder.image);
 
 

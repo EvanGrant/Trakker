@@ -63,7 +63,8 @@
         android:hint="Email"
         android:textStyle="italic"
         android:textColorHint="@color/grey"
-        android:backgroundTint="@color/grey"/>
+        android:backgroundTint="@color/grey"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/PasswordRegistration"

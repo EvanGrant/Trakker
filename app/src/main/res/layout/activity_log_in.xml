@@ -59,15 +59,20 @@
 
     <Button
         android:id="@+id/CreateacctBtn"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="291dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/darkgrey"
         android:gravity="center"
         android:text="CREATE ACCOUNT"
         android:textColorHint="@color/black"
-        android:textSize="15sp" />
+        android:textSize="8sp" />
 
     <Button
         android:id="@+id/signInBtn"
@@ -85,9 +90,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="116dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="128dp"
         android:layout_marginBottom="22dp"
         android:text="Don't have an account?"
+        android:textSize="8sp"
         android:textColor="@color/grey"
         android:textStyle="italic" />
 

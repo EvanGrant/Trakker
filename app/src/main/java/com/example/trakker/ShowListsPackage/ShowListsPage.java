@@ -192,7 +192,7 @@ public class ShowListsPage extends AppCompatActivity {
                     public void run() {
 
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, myResponse, Toast.LENGTH_SHORT).show();
 
                     }
                 });

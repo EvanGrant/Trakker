@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemToListPackage.AddItemToListPage">
+    tools:context=".AddItemToListPackage.AddItemToListPage"
+    android:background="@color/darkgrey">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAddItemToLists"
